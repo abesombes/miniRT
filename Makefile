@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/08 01:44:14 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/08 16:07:09 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,19 @@ LIBMLX =		libmlx.dylib \
 SAVE =			-fsanitize=address
 
 SRC =			minirt.c \
+				control/ft_control_args_file.c \
+				err/ft_err_print.c \
 				init/ft_init.c \
-
+				olst/ft_olst_add_lookup_obj.c \
+				parse/ft_parse_check_move.c \
+				parse/ft_parse_custom_atoi.c \
+				parse/ft_parse_cylidr_pln_sphr_sqr_triang.c \
+				parse/ft_parse_fd_line_by_line.c \
+				parse/ft_parse_get_next_line.c \
+				parse/ft_parse_get_next_line_utils.c \
+				parse/ft_parse_line_by_obj_type.c \
+				parse/ft_parse_open_rt_file.c \
+				parse/ft_parse_res_cam_alight_light.c				
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 01:27:53 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/08 18:16:53 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,6 @@ typedef	struct	s_alight
 {
 	double		alight_int;
 }				t_alight;
-
-typedef struct  s_data {
-	void        *img;
-	char        *addr;
-	int         bits_per_pixel;
-	int         line_length;
-	int         endian;
-}               t_data;
 
 typedef struct  s_ray {
 	t_vector    origin;
@@ -105,21 +97,31 @@ struct  s_object
 	t_cylinder	cylinder;
 	t_cam		cam;
 	t_vector	rgb;
-	t_object     *next;
 };
 
-typedef t_object *t_olst;
+typedef struct	s_olst t_olst;
+struct s_olst
+{
+	t_object	obj;
+	t_olst		*next;
+};
 
 typedef struct	s_scene
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_data		data;
+	void        *img;
+	char        *addr;
+	int         bits_per_pixel;
+	int         line_length;
+	int         endian;
 	int			res_w;
 	int 		res_h;
 	t_olst     	olst;
 }				t_scene;
 
 int ft_init_sc(t_scene *sc);
+int ft_control_args_file(int ac, char *av);
+int	ft_parse_open_rt_file(char *av, t_scene *sc);
 
 #endif

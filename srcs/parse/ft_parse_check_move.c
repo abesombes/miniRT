@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_parse_check_move.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 00:53:23 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 15:07:12 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/08 14:56:15 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/08 14:57:21 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "../../includes/ft_parse.h"
 
-int ft_init_sc(t_scene *sc)
+void	ft_move_to_next_data(char **line)
 {
-	sc->olst = NULL;
-	return (1);
+	while (**line && (**line == ' ' || **line == '\t'))
+		(*line)++;
+}
+
+int	ft_check_if_space_tab_only(char *line)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	if (!*line)
+		return (1);
+	return (0);
 }

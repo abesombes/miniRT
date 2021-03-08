@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   ft_olst.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 00:53:23 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 15:07:12 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/08 15:24:01 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/08 18:19:41 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#ifndef FT_OLST_H
+# define FT_OLST_H
 
-int ft_init_sc(t_scene *sc)
-{
-	sc->olst = NULL;
-	return (1);
-}
+t_object	*ft_olst_pushback_obj(t_olst **olst);
+
+#endif
