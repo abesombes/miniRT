@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 18:16:53 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:58:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,14 @@ typedef struct	s_scene
 	int         endian;
 	int			res_w;
 	int 		res_h;
-	t_olst     	olst;
+	t_olst     	*olst;
 }				t_scene;
 
 int ft_init_sc(t_scene *sc);
 int ft_control_args_file(int ac, char *av);
 int	ft_parse_open_rt_file(char *av, t_scene *sc);
+int	ft_maths_arr_val_in_range(double *arr, double min_b, double max_b);
+t_vector *ft_vec(double x, double y, double z);
+void    ft_display_vec(t_vector *v);
 
 #endif

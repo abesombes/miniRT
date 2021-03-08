@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 22:18:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:59:37 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ int	ft_parse_alight(char *line, t_scene *sc)
 	int err_code;
 	t_olst *new_obj = NULL;
 
+	(void)line;
 	nb_digits = 0;
 	err_code = 0;
 	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
 		err_code = 12;
 	ft_move_to_next_data(&line);
-	if ((sc->olst.obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
+	if ((sc->olst->obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
 		return (-9);
-
-	ft_get_rgb(&line, sc, &err_code);
+	ft_get_rgb(&line, sc->olst, &err_code);
+	ft_display_vec(&sc->olst->obj.rgb);
 	if (err_code)
 		return (err_code); 
 	return (0);

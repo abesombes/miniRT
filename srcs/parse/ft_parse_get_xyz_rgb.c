@@ -6,22 +6,20 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 17:10:27 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:53:59 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_parse.h"
-/*
-void ft_get_rgb(char **line, t_scene *sc, int *err_code)
+
+void ft_get_rgb(char **line, t_olst *olst, int *err_code)
 {
 	double rgb[3] = {-1, -1, -1};
 	int nb_digits;
 
 	*err_code = 0;
 	ft_move_to_next_data(line);
-	if (!(sc->rgb = (t_vector *)malloc(sizeof(t_vector))))
-		*err_code = 12;
 	nb_digits = 0;
 	rgb[0] = ft_atoi(line, &nb_digits);
 	if (!nb_digits)
@@ -35,11 +33,11 @@ void ft_get_rgb(char **line, t_scene *sc, int *err_code)
 		(*line)++;
 	rgb[2] = ft_atoi(line, &nb_digits);
 	ft_move_to_next_data(line);
-	if (**line || !nb_digits || !ft_arr_val_within_range(rgb, 0.0, 255.0))
+	if (**line || !nb_digits || !ft_maths_arr_val_in_range(rgb, 0.0, 255.0))
 		*err_code = -8;
-	sc->rgb = ft_vec(rgb[0], rgb[1], rgb[2]);
+	olst->obj.rgb = *ft_vec(rgb[0], rgb[1], rgb[2]);
 }
-
+/*
 void ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code)
 {
 	double xyz[3] = {-1, -1, -1};

@@ -6,11 +6,11 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 09:50:05 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 14:13:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:28:48 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_get_next_line.h"
+#include "../../includes/ft_parse_get_next_line.h"
 
 int		ft_parse_get_next_line(int fd, char **line)
 {

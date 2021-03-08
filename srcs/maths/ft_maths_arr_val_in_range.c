@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_maths_arr_val_in_range.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/07 22:30:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 22:28:04 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/08 22:49:56 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/08 22:50:26 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "../../includes/minirt.h"
 
-int	main(int ac, char **av)
+int	ft_maths_arr_val_in_range(double *arr, double min_b, double max_b)
 {
-	t_scene	sc;
+	int i;
 
-	if ((ft_control_args_file(ac, av[1]) == -1))
-		return (-1);
-	if (!ft_parse_open_rt_file(av[1], &sc))
-		return (-1);
-//	sc.mlx = mlx_init();
-	printf("sc.res: [%d, %d]", sc.res_w, sc.res_h);
-//	sc.mlx_win = mlx_new_window(sc.mlx, sc.res_w, sc.res_h, "miniRT - RayTracer Engine");
-//	mlx_loop(sc.mlx);
+	i = 0;
+	while (i < 3)
+	{
+		if (arr[i] > max_b || arr[i] < min_b)
+		return (0);
+		i++;
+	}
+	return (1);
 }
