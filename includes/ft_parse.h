@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:26:41 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 22:43:48 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:14:31 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		ft_parse_line_by_obj_type(char *line, t_scene *sc);
 int		ft_parse_res(char *line, t_scene *sc);
 int		ft_parse_alight(char *line, t_scene *sc);
-int		ft_check_if_space_tab_only(char *line);
+int		ft_check_if_space_tab_only(char **line);
 int 	ft_parse_fd_line_by_line(int fd, t_scene *sc);
 void	ft_move_to_next_data(char **line);
 int		ft_atoi(char **str, int *nb_digits);

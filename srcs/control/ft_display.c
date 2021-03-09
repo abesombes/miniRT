@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 22:57:30 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 23:00:37 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:20:24 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    ft_display_vec(t_vector *v)
 {
-    printf("\nv->x: %f - v->y: %f - v->z: %f", v->x, v->y, v->z);
+    printf("\nv->x: %f - v->y: %f - v->z: %f\n", v->x, v->y, v->z);
 }
 /*
 void    ft_display_sp(t_sphere *s)
