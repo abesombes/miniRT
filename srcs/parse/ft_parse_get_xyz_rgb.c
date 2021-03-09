@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 22:53:59 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:47:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void ft_get_rgb(char **line, t_olst *olst, int *err_code)
 		*err_code = -8;
 	olst->obj.rgb = *ft_vec(rgb[0], rgb[1], rgb[2]);
 }
-/*
-void ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code)
+
+void ft_get_xyz(char **line, t_vector *vec, double *bounds, int *err_code)
 {
 	double xyz[3] = {-1, -1, -1};
 	int nb_digits;
@@ -57,9 +57,9 @@ void ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code)
 	if (**line == ',')
 		(*line)++;
 	xyz[2] = ft_atoif(line, &nb_digits);
-	if (bounds && !ft_arr_val_within_range(xyz, bounds[0], bounds[1]))
+	if (bounds && !ft_maths_arr_val_in_range(xyz, bounds[0], bounds[1]))
 		*err_code = -6;
 	if (!nb_digits)
 		*err_code = -6;
-	*vec = ft_vec(xyz[0], xyz[1], xyz[2]);
-}*/
+	vec = ft_vec(xyz[0], xyz[1], xyz[2]);
+}

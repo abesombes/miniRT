@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/09 16:39:43 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:49:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,33 @@ int	ft_parse_alight(char *line, t_scene *sc)
 		return (err_code); 
 	return (0);
 }
-/*
+
 int	ft_parse_cam(char *line, t_scene *sc)
 {
 	int		err_code;
-	t_scene	*new_sc;
+	t_olst	*new_obj = NULL;
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
 	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
 		err_code = 12;
-	ft_get_xyz(&line, &sc->olst->obj.cam.pos, 0, &err_code);
+	ft_get_xyz(&line, &new_obj->obj.cam.pos, 0, &err_code);
 	if (err_code)
 		return (err_code); 
-	if (!new_sc->cam->pos)
+	if (!(new_obj->obj.cam.pos))
 		return (12);
-	ft_get_xyz(&line, &sc->olst->obj.cam.orient, bounds, &err_code);
+	ft_get_xyz(&line, &new_obj->obj.cam.orient, bounds, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -10: err_code); 
-	if (!new_sc->cam->orient)
+	if (!new_obj->obj.cam.orient)
 		return (12);
 	ft_move_to_next_data(&line);
-	new_sc->cam->fov = ft_atoif(&line, &err_code);
-	if (!ft_within_range(new_sc->cam->fov, 0, 180) || !err_code)
+	new_obj->obj.cam.fov = ft_atoif(&line, &err_code);
+	if (!ft_within_range(new_obj->obj.cam-.fov, 0, 180) || !err_code)
 		return (-13);
 	return (0);
 }
-
+/*
 int	ft_analyze_light(char *line, t_scene *sc)
 {
 	int		err_code;
