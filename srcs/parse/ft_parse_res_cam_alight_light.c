@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/09 16:49:16 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 00:33:48 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,64 +27,55 @@ int	ft_parse_alight(char *line, t_scene *sc)
 	ft_move_to_next_data(&line);
 	if ((new_obj->obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
 		return (-9);
-	printf("\nalight_int: %f", new_obj->obj.alight.alight_int);
 	ft_get_rgb(&line, new_obj, &err_code);
-	ft_display_vec(&new_obj->obj.rgb);
-	if (err_code)
-		return (err_code); 
-	return (0);
+	return (err_code ? err_code : 0);
 }
 
 int	ft_parse_cam(char *line, t_scene *sc)
 {
 	int		err_code;
 	t_olst	*new_obj = NULL;
+	t_vector *vec = NULL;
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
 	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
 		err_code = 12;
-	ft_get_xyz(&line, &new_obj->obj.cam.pos, 0, &err_code);
+	vec = &new_obj->obj.cam.pos;
+	ft_get_xyz(&line, &vec, 0, &err_code);
 	if (err_code)
 		return (err_code); 
-	if (!(new_obj->obj.cam.pos))
-		return (12);
-	ft_get_xyz(&line, &new_obj->obj.cam.orient, bounds, &err_code);
+	vec = &new_obj->obj.cam.orient;
+	ft_get_xyz(&line, &vec, bounds, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -10: err_code); 
-	if (!new_obj->obj.cam.orient)
-		return (12);
 	ft_move_to_next_data(&line);
 	new_obj->obj.cam.fov = ft_atoif(&line, &err_code);
-	if (!ft_within_range(new_obj->obj.cam-.fov, 0, 180) || !err_code)
+	if (!ft_within_range(new_obj->obj.cam.fov, 0, 180) || !err_code)
 		return (-13);
 	return (0);
 }
-/*
-int	ft_analyze_light(char *line, t_scene *sc)
+
+int	ft_parse_light(char *line, t_scene *sc)
 {
 	int		err_code;
-	t_scene	*new_sc;
+	t_vector *vec = NULL;
+	t_olst	*new_obj = NULL;
 
 	err_code = 0;
-	if (!(new_sc = ft_init_light(scene)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
 		err_code = 12;
-	ft_get_xyz(&line, &new_sc->light->light_pos, 0, &err_code);
+	vec = &new_obj->obj.light.light_pos;
+	ft_get_xyz(&line, &vec, 0, &err_code);
 	if (err_code)
 		return (err_code); 
-	if (!new_sc->light->light_pos)
-		return (12);
 	ft_move_to_next_data(&line);
-	new_sc->light->light_int = ft_atoif(&line, &err_code);
-	if (!ft_within_range(new_sc->light->light_int, 0, 1.0) || !err_code)
+	new_obj->obj.light.light_int = ft_atoif(&line, &err_code);
+	if (!ft_within_range(new_obj->obj.light.light_int, 0, 1.0) || !err_code)
 		return (-11);
-	ft_get_rgb(&line, scene, &err_code);
-	if (err_code)
-		return (err_code); 
-	if (!scene->rgb)
-		return (12);
-	return (0);
-}*/
+	ft_get_rgb(&line, new_obj, &err_code);
+	return (err_code ? err_code : 0);;
+}
 
 int	ft_parse_res(char *line, t_scene *sc)
 {

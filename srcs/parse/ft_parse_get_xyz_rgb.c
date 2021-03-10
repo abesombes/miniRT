@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/09 16:47:18 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/10 18:33:54 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void ft_get_rgb(char **line, t_olst *olst, int *err_code)
 
 	*err_code = 0;
 	ft_move_to_next_data(line);
+	printf("\nline: [%s]", *line);
 	nb_digits = 0;
 	rgb[0] = ft_atoi(line, &nb_digits);
 	if (!nb_digits)
@@ -38,7 +39,7 @@ void ft_get_rgb(char **line, t_olst *olst, int *err_code)
 	olst->obj.rgb = *ft_vec(rgb[0], rgb[1], rgb[2]);
 }
 
-void ft_get_xyz(char **line, t_vector *vec, double *bounds, int *err_code)
+void ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code)
 {
 	double xyz[3] = {-1, -1, -1};
 	int nb_digits;
@@ -61,5 +62,6 @@ void ft_get_xyz(char **line, t_vector *vec, double *bounds, int *err_code)
 		*err_code = -6;
 	if (!nb_digits)
 		*err_code = -6;
-	vec = ft_vec(xyz[0], xyz[1], xyz[2]);
+	printf("\nxyz: [%f, %f, %f]", xyz[0], xyz[1], xyz[2]);
+	*vec = ft_vec(xyz[0], xyz[1], xyz[2]);
 }
