@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:26:41 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 00:30:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:45:50 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		ft_parse_line_by_obj_type(char *line, t_scene *sc);
 int		ft_parse_res(char *line, t_scene *sc);
 int		ft_parse_cam(char *line, t_scene *sc);
-int		ft_parse_cylinder(char *line, t_scene *sc);
+int		ft_parse_cylinder(char *line, t_scene *sc, int err_code);
 int		ft_parse_alight(char *line, t_scene *sc);
 int		ft_parse_light(char *line, t_scene *sc);
 int		ft_parse_plane(char *line, t_scene *sc);

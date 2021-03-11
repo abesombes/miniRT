@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/10 18:33:54 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:50:40 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code)
 		*err_code = -6;
 	if (!nb_digits)
 		*err_code = -6;
-	printf("\nxyz: [%f, %f, %f]", xyz[0], xyz[1], xyz[2]);
+	printf("\nxyz: [%f, %f, %f]\n", xyz[0], xyz[1], xyz[2]);
 	*vec = ft_vec(xyz[0], xyz[1], xyz[2]);
 }

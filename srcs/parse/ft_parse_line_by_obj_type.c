@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:20:40 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 00:16:17 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:44:54 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_parse_line_by_obj_type(char *line, t_scene *sc)
 	else if (line[0] == 's' && line[1] == 'q')
 		i = ft_parse_square(line + 2, sc);
 	else if (line[0] == 'c' && line[1] == 'y')
-		i = ft_parse_cylinder(line + 2, sc);
+		i = ft_parse_cylinder(line + 2, sc, 0);
 	else if (line[0] == 't' && line[1] == 'r')
 		i = ft_parse_triangle(line + 2, sc);
 	else
