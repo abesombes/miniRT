@@ -6,20 +6,21 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 11:57:15 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 16:40:07 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_olst.h"
 
-t_olst	*ft_olst_pushback_obj(t_olst **olst, char obj_type)
+t_olst	*ft_olst_pushback_obj(t_olst **olst, char obj_type, int *obj_id)
 {
 	t_olst *new_elem;
 	t_olst *tmp;
 
 	if (!(new_elem = (t_olst *)malloc(sizeof(t_olst))))
 		return (NULL);
+	new_elem->obj.id = *obj_id;
 	new_elem->next = NULL;
 	if (!(*olst))
 		*olst = new_elem;

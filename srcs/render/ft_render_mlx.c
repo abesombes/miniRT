@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_olst.h                                          :+:      :+:    :+:   */
+/*   ft_render_mlx.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 15:24:01 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 16:53:54 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/11 15:58:10 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/11 17:07:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_OLST_H
-# define FT_OLST_H
+#include "../../includes/minirt.h"
+#include "../../includes/ft_render.h"
 
-/*-----------------ft_olst_add_lookup_obj.c----------------*/
-t_olst	*ft_olst_pushback_obj(t_olst **olst, char obj_type, int *obj_id);
-int     ft_olst_count_obj_by_obj_type(t_olst **olst, char obj_type);
+void    my_mlx_pixel_put(t_scene *sc, int x, int y, int color)
+{
+    char    *dst;
 
-#endif
+    dst = sc->addr + (y * sc->line_length + x * (sc->bits_per_pixel / 8));
+    *(unsigned int*)dst = color;
+}

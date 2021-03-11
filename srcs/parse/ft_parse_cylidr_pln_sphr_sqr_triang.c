@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:24:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 11:03:42 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:02:46 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include "../../includes/ft_parse.h"
 #include "../../includes/ft_olst.h"
 
-int	ft_parse_cylinder(char *line, t_scene *sc, int err_code)
+int	ft_parse_cylinder(char *line, t_scene *sc, int err_code, int *obj_id)
 {
 	double	bounds[2] = {-1.0, 1.0};
 	t_vector *vec = NULL;
 	t_olst	*new_obj = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'y')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'y', obj_id)))
 		err_code = 12;
 	printf("\n\n--------------------\n");
 	printf("------CYLINDER------\n");
@@ -46,7 +46,7 @@ int	ft_parse_cylinder(char *line, t_scene *sc, int err_code)
 	return (err_code ? err_code : 0);
 }
 
-int	ft_parse_plane(char *line, t_scene *sc)
+int	ft_parse_plane(char *line, t_scene *sc, int *obj_id)
 {
 	int		err_code;
 	t_olst	*new_obj = NULL;
@@ -54,7 +54,7 @@ int	ft_parse_plane(char *line, t_scene *sc)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'p')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'p', obj_id)))
 		err_code = 12;
 	vec = &new_obj->obj.plane.u;
 	printf("\n\n--------------------\n");
@@ -74,14 +74,14 @@ int	ft_parse_plane(char *line, t_scene *sc)
 	return (err_code ? err_code : 0);
 }
 
-int	ft_parse_sphere(char *line, t_scene *sc)
+int	ft_parse_sphere(char *line, t_scene *sc, int *obj_id)
 {
 	int		err_code;
 	t_olst	*new_obj = NULL;
 	t_vector *vec = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 's')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 's', obj_id)))
 		err_code = 12;
 	vec = &new_obj->obj.sp.origin;
 	printf("\n\n--------------------\n");
@@ -101,7 +101,7 @@ int	ft_parse_sphere(char *line, t_scene *sc)
 	return (err_code ? err_code : 0);
 }
 
-int	ft_parse_square(char *line, t_scene *sc)
+int	ft_parse_square(char *line, t_scene *sc, int *obj_id)
 {
 	int		err_code;
 	t_olst	*new_obj = NULL;
@@ -109,7 +109,7 @@ int	ft_parse_square(char *line, t_scene *sc)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'q')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'q', obj_id)))
 		err_code = 12;
 	printf("\n\n--------------------\n");
 	printf("------SQUARE------\n");
@@ -133,14 +133,14 @@ int	ft_parse_square(char *line, t_scene *sc)
 	return (err_code ? err_code : 0);
 }
 
-int	ft_parse_triangle(char *line, t_scene *sc)
+int	ft_parse_triangle(char *line, t_scene *sc, int *obj_id)
 {
 	int		err_code;
 	t_olst	*new_obj = NULL;
 	t_vector *vec = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 't')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 't', obj_id)))
 		err_code = 12;
 	vec = &new_obj->obj.tr.a;
 	printf("\n\n--------------------\n");

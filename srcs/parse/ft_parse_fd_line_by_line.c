@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:53:11 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 15:36:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 16:35:44 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ int ft_parse_fd_line_by_line(int fd, t_scene *sc)
 {
 	int i;
 	int ret;
+	int obj_id;
 	char *line;
 
+	obj_id = 0;
 	while ((ret = ft_parse_get_next_line(fd, &line)) >= 0)
 	{
-		i = ft_parse_line_by_obj_type(line, sc);
+		i = ft_parse_line_by_obj_type(line, sc, &obj_id);
+		obj_id++;
 		if (i != 0)
 		{
 			ft_err_print(i);

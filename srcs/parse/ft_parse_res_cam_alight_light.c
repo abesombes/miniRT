@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 15:48:23 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:00:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_parse_res(char *line, t_scene *sc)
 	return (0);
 }
 
-int	ft_parse_cam(char *line, t_scene *sc)
+int	ft_parse_cam(char *line, t_scene *sc, int *obj_id)
 {
 	int		err_code;
 	t_olst	*new_obj = NULL;
@@ -39,7 +39,7 @@ int	ft_parse_cam(char *line, t_scene *sc)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'm')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'm', obj_id)))
 		err_code = 12;
 	vec = &new_obj->obj.cam.pos;
 	ft_get_xyz(&line, &vec, 0, &err_code);
@@ -56,7 +56,7 @@ int	ft_parse_cam(char *line, t_scene *sc)
 	return (0);
 }
 
-int	ft_parse_alight(char *line, t_scene *sc)
+int	ft_parse_alight(char *line, t_scene *sc, int *obj_id)
 {
 	int nb_digits;
 	int err_code;
@@ -64,7 +64,7 @@ int	ft_parse_alight(char *line, t_scene *sc)
 
 	nb_digits = 0;
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'a')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'a', obj_id)))
 		err_code = 12;
 	ft_move_to_next_data(&line);
 	if ((new_obj->obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
@@ -73,16 +73,16 @@ int	ft_parse_alight(char *line, t_scene *sc)
 	return (err_code ? err_code : 0);
 }
 
-int	ft_parse_light(char *line, t_scene *sc)
+int	ft_parse_light(char *line, t_scene *sc, int *obj_id)
 {
 	int		err_code;
 	t_vector *vec = NULL;
 	t_olst	*new_obj = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'l')))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'l', obj_id)))
 		err_code = 12;
-	printf("\nLIGHT: [%c]", new_obj->obj.obj_type);
+	printf("\nLIGHT: [%c] - obj_id = [%i]", new_obj->obj.obj_type, new_obj->obj.id);
 	vec = &new_obj->obj.light.light_pos;
 	ft_get_xyz(&line, &vec, 0, &err_code);
 	if (err_code)

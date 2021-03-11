@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 15:46:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:00:21 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef struct	s_scene
 	int 		res_h;
 	int			scr_w;
 	int 		scr_h;
+	int			cur_cam;
+	t_ray		ray;
 	t_olst     	*olst;
 }				t_scene;
 

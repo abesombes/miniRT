@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/11 14:00:08 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/11 17:01:02 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRC =			minirt.c \
 				export/ft_export_bmp.c \
 				init/ft_init.c \
 				maths/ft_maths_arr_val_in_range.c \
+				maths/ft_maths_vec_calc.c \
+				maths/ft_maths_vec_norm.c \
+				maths/ft_maths_vec_scal_calc.c \
 				maths/ft_maths_vec.c \
 				olst/ft_olst_add_lookup_obj.c \
 				parse/ft_parse_check_move.c \
@@ -48,6 +51,9 @@ SRC =			minirt.c \
 				parse/ft_parse_line_by_obj_type.c \
 				parse/ft_parse_open_rt_file.c \
 				parse/ft_parse_res_cam_alight_light.c \
+				render/ft_render_mlx.c \
+				rt/ft_rt_set_ray.c \
+				rt/ft_rt_trace_rays.c \
 				str/ft_strcmp.c		
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
