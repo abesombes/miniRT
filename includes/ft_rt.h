@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_maths_arr_val_in_range.c                        :+:      :+:    :+:   */
+/*   ft_rt.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 22:49:56 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 14:40:26 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/11 15:26:43 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/11 15:54:05 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
-#include "../../includes/ft_maths.h"
+#ifndef FT_RT_H
+# define FT_RT_H
 
-int	ft_maths_arr_val_in_range(double *arr, double min_b, double max_b)
-{
-	int i;
+/*--------------------------------ft_rt_set_ray.c-----------------------------*/
+void    ft_set_ray(t_ray *r, t_vector *origin, t_vector *direction);
+void	ft_set_light(t_light *light, t_vector *light_pos, double light_int);
 
-	i = 0;
-	while (i < 3)
-	{
-		if (arr[i] > max_b || arr[i] < min_b)
-		return (0);
-		i++;
-	}
-	return (1);
-}
+/*-------------------------------ft_rt_trace_rays.c---------------------------*/
+void    ft_rt_trace_rays(t_scene *sc);
 
-int	ft_within_range(double nb, double min_b, double max_b)
-{
-	if (nb > max_b || nb < min_b)
-		return (0);
-	return (1);
-}
+#endif

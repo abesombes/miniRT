@@ -1,44 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_maths_vec.c                                     :+:      :+:    :+:   */
+/*   ft_maths_vec_norm.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 22:52:05 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 14:38:28 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/11 14:36:19 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/11 14:37:06 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_maths.h"
 
-void        ft_set_vec(t_vector *v, double x, double y, double z)
+double  ft_get_sqnorm(t_vector *v)
 {
-    v->x = x;
-    v->y = y;
-    v->z = z;
+    return (v->x * v->x + v->y * v->y + v->z * v->z);
 }
 
-t_vector    *ft_vec(double x, double y, double z)
-{
-	t_vector *u;
-
-	if (!(u = (t_vector*)malloc(sizeof(t_vector))))
-		return (NULL);
-	u->x = x;
-	u->y = y;
-	u->z = z;
-	return (u);
-}
-
-t_vector    *ft_dup_vec(t_vector *v)
+t_vector *ft_get_normvec(t_vector *v)
 {
     t_vector *w;
 
-    w = (t_vector *)malloc(sizeof(t_vector));
-    w->x = v->x;
-    w->y = v->y;
-    w->z = v->z;
+    w = ft_dup_vec(v);
+    ft_norm_vec(w);
     return (w);
+}
+
+void    ft_norm_vec(t_vector *v)
+{
+    double norm;
+
+    norm = sqrt(ft_get_sqnorm(v));
+    v->x /= norm;
+    v->y /= norm;
+    v->z /= norm;
 }

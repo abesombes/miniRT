@@ -6,29 +6,29 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 10:25:36 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:48:23 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_parse.h"
 #include "../../includes/ft_olst.h"
+#include "../../includes/ft_maths.h"
 
-int	ft_parse_alight(char *line, t_scene *sc)
+int	ft_parse_res(char *line, t_scene *sc)
 {
 	int nb_digits;
-	int err_code;
-	t_olst *new_obj = NULL;
 
 	nb_digits = 0;
-	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'a')))
-		err_code = 12;
+	if (sc->res_w > 0 || sc->res_h > 0)
+		return (-3);
 	ft_move_to_next_data(&line);
-	if ((new_obj->obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
-		return (-9);
-	ft_get_rgb(&line, new_obj, &err_code);
-	return (err_code ? err_code : 0);
+	if ((sc->res_w = ft_atoi(&line, &nb_digits)) <= 0  || !nb_digits)
+		return (-2);
+	ft_move_to_next_data(&line);
+	if ((sc->res_h = ft_atoi(&line, &nb_digits)) <= 0  || !nb_digits)
+		return (-2);
+	return (0);
 }
 
 int	ft_parse_cam(char *line, t_scene *sc)
@@ -56,6 +56,23 @@ int	ft_parse_cam(char *line, t_scene *sc)
 	return (0);
 }
 
+int	ft_parse_alight(char *line, t_scene *sc)
+{
+	int nb_digits;
+	int err_code;
+	t_olst *new_obj = NULL;
+
+	nb_digits = 0;
+	err_code = 0;
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'a')))
+		err_code = 12;
+	ft_move_to_next_data(&line);
+	if ((new_obj->obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
+		return (-9);
+	ft_get_rgb(&line, new_obj, &err_code);
+	return (err_code ? err_code : 0);
+}
+
 int	ft_parse_light(char *line, t_scene *sc)
 {
 	int		err_code;
@@ -76,20 +93,4 @@ int	ft_parse_light(char *line, t_scene *sc)
 		return (-11);
 	ft_get_rgb(&line, new_obj, &err_code);
 	return (err_code ? err_code : 0);;
-}
-
-int	ft_parse_res(char *line, t_scene *sc)
-{
-	int nb_digits;
-
-	nb_digits = 0;
-	if (sc->res_w > 0 || sc->res_h > 0)
-		return (-3);
-	ft_move_to_next_data(&line);
-	if ((sc->res_w = ft_atoi(&line, &nb_digits)) <= 0  || !nb_digits)
-		return (-2);
-	ft_move_to_next_data(&line);
-	if ((sc->res_h = ft_atoi(&line, &nb_digits)) <= 0  || !nb_digits)
-		return (-2);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 14:15:41 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:42:08 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../includes/ft_err_print.h"
 #include "../../includes/ft_parse.h"
 #include "../../includes/ft_olst.h"
+#include "../../includes/ft_maths.h"
 
 int	ft_parse_control_min_requirements(t_scene *sc)
 {

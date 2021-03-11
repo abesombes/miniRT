@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:11:55 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 14:11:57 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:36:12 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,18 @@ typedef struct	s_fl
 	int			bytes_read;
 	int			fd;
 }				t_fl;
+
+void			ft_putstr_fd(char *s, int fd);
+
+/*--------------------ft_parse_get_next_line.c--------------------------*/
 int				ft_parse_get_next_line(int fd, char **line);
-int				find_line(t_fl *fl);
+
+/*--------------------ft_parse_get_next_line_utils.c--------------------------*/
+size_t			ft_strlen(const char *str);
 char			*ft_strnjoin(char *s1, char const *s2, size_t n);
+int				find_line(t_fl *fl);
 int				init(t_fl *fl, int fd, char **line);
 int				reinit(t_fl *fl);
-void			ft_putstr_fd(char *s, int fd);
 
 #endif
 

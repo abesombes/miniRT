@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:23:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 11:56:29 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:30:12 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define err_msg_twice_res "Error\nThe .rt scene file contains twice a Resolution definition.\n"
 # define err_msg_invalid_res_render_size "Error\nResolution Render Size x and y should be > 0.\n"
 
+/*-----------------ft_err_print.c----------------*/
 int ft_err_print(int error_num);
 int ft_err_print_2(int error_num);
 

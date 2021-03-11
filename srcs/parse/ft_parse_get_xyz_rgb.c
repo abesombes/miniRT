@@ -6,12 +6,13 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 11:49:36 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:41:52 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_parse.h"
+#include "../../includes/ft_maths.h"
 
 void ft_get_rgb(char **line, t_olst *olst, int *err_code)
 {

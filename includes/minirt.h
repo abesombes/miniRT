@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 14:31:06 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:46:38 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,8 @@ typedef struct	s_scene
 
 int 		ft_init_sc(t_scene *sc);
 int 		ft_control_args_file(int ac, char *av);
-int			ft_parse_open_rt_file(char *av, t_scene *sc);
-int			ft_maths_arr_val_in_range(double *arr, double min_b, double max_b);
 t_vector 	*ft_vec(double x, double y, double z);
 void		ft_display_vec(t_vector *v);
-int			ft_within_range(double nb, double min_b, double max_b);
 int			ft_close_win(char *p);
 int			ft_key_hook(int keycode, void *img, t_scene *sc);
 int			ft_strcmp(const char *s1, const char *s2);
