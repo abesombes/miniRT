@@ -6,14 +6,14 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 12:31:50 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:31:06 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <mlx.h>
+# include "../minilibx_mms/mlx.h"
 # define _USE_MATH_DEFINES
 # include <math.h>
 # include <stdio.h>
@@ -130,8 +130,7 @@ t_vector 	*ft_vec(double x, double y, double z);
 void		ft_display_vec(t_vector *v);
 int			ft_within_range(double nb, double min_b, double max_b);
 int			ft_close_win(char *p);
-int     	key_hook(int keycode, void *img);
-int     	mouse_hook(int mousecode, int x, int y, void *img);
+int			ft_key_hook(int keycode, void *img, t_scene *sc);
 int			ft_strcmp(const char *s1, const char *s2);
 
 #endif

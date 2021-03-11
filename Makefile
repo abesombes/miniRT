@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/08 22:59:58 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/11 14:00:08 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ SAVE =			-fsanitize=address
 SRC =			minirt.c \
 				control/ft_control_args_file.c \
 				control/ft_display.c \
+				control/ft_hooks.c \
+				control/ft_windows.c \
 				err/ft_err_print.c \
+				export/ft_export_bmp.c \
 				init/ft_init.c \
 				maths/ft_maths_arr_val_in_range.c \
 				maths/ft_maths_vec.c \
@@ -44,7 +47,8 @@ SRC =			minirt.c \
 				parse/ft_parse_get_xyz_rgb.c \
 				parse/ft_parse_line_by_obj_type.c \
 				parse/ft_parse_open_rt_file.c \
-				parse/ft_parse_res_cam_alight_light.c				
+				parse/ft_parse_res_cam_alight_light.c \
+				str/ft_strcmp.c		
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
