@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:24:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 09:52:35 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 11:03:42 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_parse_cylinder(char *line, t_scene *sc, int err_code)
 	t_olst	*new_obj = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'y')))
 		err_code = 12;
 	printf("\n\n--------------------\n");
 	printf("------CYLINDER------\n");
@@ -54,7 +54,7 @@ int	ft_parse_plane(char *line, t_scene *sc)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'p')))
 		err_code = 12;
 	vec = &new_obj->obj.plane.u;
 	printf("\n\n--------------------\n");
@@ -81,7 +81,7 @@ int	ft_parse_sphere(char *line, t_scene *sc)
 	t_vector *vec = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 's')))
 		err_code = 12;
 	vec = &new_obj->obj.sp.origin;
 	printf("\n\n--------------------\n");
@@ -109,7 +109,7 @@ int	ft_parse_square(char *line, t_scene *sc)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'q')))
 		err_code = 12;
 	printf("\n\n--------------------\n");
 	printf("------SQUARE------\n");
@@ -140,7 +140,7 @@ int	ft_parse_triangle(char *line, t_scene *sc)
 	t_vector *vec = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 't')))
 		err_code = 12;
 	vec = &new_obj->obj.tr.a;
 	printf("\n\n--------------------\n");

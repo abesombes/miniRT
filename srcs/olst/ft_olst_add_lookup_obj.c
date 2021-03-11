@@ -6,13 +6,14 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 22:20:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 11:57:15 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "../../includes/ft_olst.h"
 
-t_olst	*ft_olst_pushback_obj(t_olst **olst)
+t_olst	*ft_olst_pushback_obj(t_olst **olst, char obj_type)
 {
 	t_olst *new_elem;
 	t_olst *tmp;
@@ -28,10 +29,28 @@ t_olst	*ft_olst_pushback_obj(t_olst **olst)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new_elem;
-		*olst = tmp;
 	}
+	new_elem->obj.obj_type = obj_type;
 	return (new_elem);
 }
+
+int ft_olst_count_obj_by_obj_type(t_olst **olst, char obj_type)
+{
+	int count;
+
+	count = 0;
+	t_olst *tmp;
+	tmp = *olst;
+	while (tmp->next)
+	{
+	//	printf("\nObject Type Detected: [%c]\n", tmp->obj.obj_type);
+		if (tmp->obj.obj_type == obj_type)
+			count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
 /*
 t_scene *ft_return_last_obj(t_scene *sc)
 {

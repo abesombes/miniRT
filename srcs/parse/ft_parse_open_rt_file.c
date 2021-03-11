@@ -6,13 +6,28 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 14:52:23 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 11:58:04 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_err_print.h"
 #include "../../includes/ft_parse.h"
+#include "../../includes/ft_olst.h"
+
+int	ft_parse_control_min_requirements(t_scene *sc)
+{
+//	printf("\ncurrent obj: [%c]", sc->olst->obj.obj_type);
+//	printf("\nnb of alight objs: [%i]", ft_olst_count_obj_by_obj_type(&sc->olst, 'a'));
+//	printf("\nnb of light objs: [%i]", ft_olst_count_obj_by_obj_type(&sc->olst, 'l'));
+//	printf("\nnb of cam objs: [%i]\n", ft_olst_count_obj_by_obj_type(&sc->olst, 'm'));
+	if ((ft_olst_count_obj_by_obj_type(&sc->olst, 'a') > 0 
+		|| ft_olst_count_obj_by_obj_type(&sc->olst, 'l') > 0) && 
+			ft_olst_count_obj_by_obj_type(&sc->olst, 'm') > 0 &&
+				sc->res_w > 0 && sc->res_h > 0) 
+		return (1);
+	return (0);
+}
 
 int	ft_parse_open_rt_file(char *av, t_scene *sc)
 {
@@ -23,6 +38,10 @@ int	ft_parse_open_rt_file(char *av, t_scene *sc)
 		return(ft_err_print(-18));
 	if (!(ft_parse_fd_line_by_line(fd, sc)))
 		return(ft_err_print(12));
+	if (!(ft_parse_control_min_requirements(sc)))
+		return(ft_err_print(-20));
+	/*if (res > scr_res)*/
+	
 	if (close(fd) == -1)
 		return(ft_err_print(-19));
 	return (1);

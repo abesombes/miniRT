@@ -6,13 +6,14 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:26:41 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 09:45:50 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 10:01:40 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PARSE_H
 # define FT_PARSE_H
 
+int     ft_parse_control_min_requirements(t_scene *sc);
 int		ft_parse_line_by_obj_type(char *line, t_scene *sc);
 int		ft_parse_res(char *line, t_scene *sc);
 int		ft_parse_cam(char *line, t_scene *sc);

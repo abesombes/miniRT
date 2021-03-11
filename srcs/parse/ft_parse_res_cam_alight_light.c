@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 00:33:48 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 10:25:36 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_parse_alight(char *line, t_scene *sc)
 
 	nb_digits = 0;
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'a')))
 		err_code = 12;
 	ft_move_to_next_data(&line);
 	if ((new_obj->obj.alight.alight_int = ft_atoif(&line, &nb_digits)) < 0 || !nb_digits)
@@ -39,7 +39,7 @@ int	ft_parse_cam(char *line, t_scene *sc)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'm')))
 		err_code = 12;
 	vec = &new_obj->obj.cam.pos;
 	ft_get_xyz(&line, &vec, 0, &err_code);
@@ -63,8 +63,9 @@ int	ft_parse_light(char *line, t_scene *sc)
 	t_olst	*new_obj = NULL;
 
 	err_code = 0;
-	if (!(new_obj = ft_olst_pushback_obj(&sc->olst)))
+	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'l')))
 		err_code = 12;
+	printf("\nLIGHT: [%c]", new_obj->obj.obj_type);
 	vec = &new_obj->obj.light.light_pos;
 	ft_get_xyz(&line, &vec, 0, &err_code);
 	if (err_code)
