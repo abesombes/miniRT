@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 14:07:11 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/12 22:55:15 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_olst	*ft_olst_pushback_obj(t_olst **olst, char obj_type, int *obj_id)
 
 	if (!(new_elem = (t_olst *)malloc(sizeof(t_olst))))
 		return (NULL);
-	new_elem->obj.id = *obj_id;
+	new_elem->id = *obj_id;
 	new_elem->next = NULL;
 	if (!(*olst))
 		*olst = new_elem;
@@ -31,7 +31,7 @@ t_olst	*ft_olst_pushback_obj(t_olst **olst, char obj_type, int *obj_id)
 			tmp = tmp->next;
 		tmp->next = new_elem;
 	}
-	new_elem->obj.obj_type = obj_type;
+	new_elem->obj_type = obj_type;
 	return (new_elem);
 }
 
@@ -45,76 +45,34 @@ int ft_olst_count_obj_by_obj_type(t_olst **olst, char obj_type)
 	while (tmp->next)
 	{
 	//	printf("\nObject Type Detected: [%c]\n", tmp->obj.obj_type);
-		if (tmp->obj.obj_type == obj_type)
+		if (tmp->obj_type == obj_type)
 			count++;
 		tmp = tmp->next;
 	}
 	return (count);
 }
 
-/*
-t_scene *ft_return_last_obj(t_scene *sc)
-{
-	t_scene *last;
-
-	last = sc;
-	while (last->next)
-		last = last->next;
-	return (last);
-}
-
-t_scene *ft_sc_add_sp(t_scene *sc, int id, t_sphere *sp)
-{
-	t_scene *tmp;
-
-	if (!(tmp = (t_scene *)malloc(sizeof(t_scene))))
-		return (NULL);
-	if (tmp)
-	{
-		tmp->obj_type = 's';
-		tmp->sp = sp;
-		tmp->id = id;
-		tmp->next = sc;
-	}
-	return tmp;
-}
-
-t_scene *ft_sc_add_tr(t_scene *sc, int id, t_triangle *tr)
-{
-	t_scene *tmp;
-
-	tmp = (t_scene *)malloc(sizeof(t_scene));
-	if (tmp)
-	{
-		tmp->obj_type = 't';
-		tmp->tr = tr;
-		tmp->id = id;
-		tmp->next = sc;
-	}
-	return tmp;
-}*/
-
-t_object *ft_olst_return_obj_by_id(t_olst **olst, int obj_id)
+t_olst *ft_olst_return_obj_by_id(t_olst **olst, int obj_id)
 {
 	t_olst *tmp;
 	
 	tmp = *olst;
-	while (tmp->next && tmp->obj.id != obj_id)
+	while (tmp && tmp->next && tmp->id != obj_id)
 		tmp = tmp->next;
-	if (tmp->obj.id == obj_id)
-		return (&tmp->obj);
+	if (tmp->id == obj_id)
+		return (tmp);
 	return (NULL);
 }
 
-t_object *ft_olst_return_first_obj_by_type(t_olst **olst, int obj_type)
+t_olst *ft_olst_return_first_obj_by_type(t_olst **olst, int obj_type)
 {
 	t_olst *tmp;
 	
 	tmp = *olst;
-	while (tmp->next && tmp->obj.obj_type != obj_type)
+	while (tmp->next && tmp->obj_type != obj_type)
 		tmp = tmp->next;
-	if (tmp->obj.obj_type == obj_type)
-		return (&tmp->obj);
+	if (tmp->obj_type == obj_type)
+		return (tmp);
 	return (NULL);
 }
 
@@ -123,9 +81,9 @@ int ft_olst_return_first_obj_id_by_type(t_olst **olst, int obj_type)
 	t_olst *tmp;
 	
 	tmp = *olst;
-	while (tmp->next && tmp->obj.obj_type != obj_type)
+	while (tmp->next && tmp->obj_type != obj_type)
 		tmp = tmp->next;
-	if (tmp->obj.obj_type == obj_type)
-		return (tmp->obj.id);
+	if (tmp->obj_type == obj_type)
+		return (tmp->id);
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 14:41:52 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/12 22:10:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void ft_get_rgb(char **line, t_olst *olst, int *err_code)
 	ft_move_to_next_data(line);
 	if (**line || !nb_digits || !ft_maths_arr_val_in_range(rgb, 0.0, 255.0))
 		*err_code = -8;
-	olst->obj.rgb = *ft_vec(rgb[0], rgb[1], rgb[2]);
+	olst->rgb = *ft_vec(rgb[0], rgb[1], rgb[2]);
 }
 
 void ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code)
