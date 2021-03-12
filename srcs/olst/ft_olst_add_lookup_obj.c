@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 16:40:07 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:07:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,40 @@ t_scene *ft_sc_add_tr(t_scene *sc, int id, t_triangle *tr)
 		tmp->next = sc;
 	}
 	return tmp;
+}*/
+
+t_object *ft_olst_return_obj_by_id(t_olst **olst, int obj_id)
+{
+	t_olst *tmp;
+	
+	tmp = *olst;
+	while (tmp->next && tmp->obj.id != obj_id)
+		tmp = tmp->next;
+	if (tmp->obj.id == obj_id)
+		return (&tmp->obj);
+	return (NULL);
 }
 
-t_scene *ft_sc_lookup_id(t_scene *sc, int obj_id)
+t_object *ft_olst_return_first_obj_by_type(t_olst **olst, int obj_type)
 {
-	t_scene *tmp;
-	tmp = sc;
-	while (tmp)
-	{
-		if (tmp->id == obj_id)
-			return (tmp);
+	t_olst *tmp;
+	
+	tmp = *olst;
+	while (tmp->next && tmp->obj.obj_type != obj_type)
 		tmp = tmp->next;
-	}
-	return (0);
-}*/
+	if (tmp->obj.obj_type == obj_type)
+		return (&tmp->obj);
+	return (NULL);
+}
+
+int ft_olst_return_first_obj_id_by_type(t_olst **olst, int obj_type)
+{
+	t_olst *tmp;
+	
+	tmp = *olst;
+	while (tmp->next && tmp->obj.obj_type != obj_type)
+		tmp = tmp->next;
+	if (tmp->obj.obj_type == obj_type)
+		return (tmp->obj.id);
+	return (-1);
+}

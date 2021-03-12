@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 17:00:21 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:40:19 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <time.h>
+
+typedef struct	s_inter
+{
+	double a;
+	double b;
+	double c;
+	double delta;
+	double t;
+	double t1;
+	double t2;
+}				t_inter;
 
 typedef struct  s_vector {
 	double     x;
@@ -49,8 +60,8 @@ typedef	struct	s_alight
 }				t_alight;
 
 typedef struct  s_ray {
-	t_vector    origin;
-	t_vector    direction;
+	t_vector    orig;
+	t_vector    dir;
 }               t_ray;
 
 typedef struct s_triangle {
@@ -78,7 +89,7 @@ typedef struct s_cylinder {
 }				t_cylinder;
 
 typedef struct	s_sp {
-	t_vector	origin;
+	t_vector	orig;
 	double		radius;
 }				t_sphere;
 
@@ -120,6 +131,8 @@ typedef struct	s_scene
 	int			scr_w;
 	int 		scr_h;
 	int			cur_cam;
+	t_vector	pix_int;
+	int			pix_color;
 	t_ray		ray;
 	t_olst     	*olst;
 }				t_scene;

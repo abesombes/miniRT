@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rt_set_ray.c                                    :+:      :+:    :+:   */
+/*   ft_rt_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 15:25:54 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 11:58:49 by abesombe         ###   ########.fr       */
+/*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
+/*   Updated: 2021/03/12 16:47:23 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 #include "../../includes/ft_rt.h"
 #include "../../includes/ft_maths.h"
 
-void    ft_ray_set(t_ray *r, t_vector *origin, t_vector *direction)
+int     ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 {
-    ft_vec_set(&r->ori, origin->x, origin->y, origin->z);
-    ft_vec_set(&r->dir, direction->x, direction->y, direction->z);
-}
-
-void	ft_light_set(t_light *light, t_vector *light_pos, double light_int)
-{
-	light->light_pos = *light_pos;
-	light->light_int = light_int;
+	inter->a = 1;
+	inter->b = 2 * ft_vec_mul(r->dir, ft_vec_sub(r->orig, sp->orig));
+	inter->c = 
+	inter->delta = inter->b * inter->b - 4 * inter->a * inter->c;
+	if (inter->delta < 0)
+		return (0);
+	inter->t1 = (-inter->b - sqrt(inter->delta))  / (2 * inter->a);
+	inter->t2 = (-inter->b + sqrt(inter->delta))  / (2 * inter->a);
+	if (inter->t2 < 0)
+	return (false);
+	if (inter->t1 > 0)
+		inter->t = inter->t1;
+	else
+		inter->t = inter->t2;
+	
 }

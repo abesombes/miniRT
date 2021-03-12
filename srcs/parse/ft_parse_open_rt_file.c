@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 14:42:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/12 11:08:37 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	ft_parse_open_rt_file(char *av, t_scene *sc)
 	if (sc->res_h > sc->scr_h)
 		sc->res_h = sc->scr_h;
 	printf("\nsc.res: [%d, %d]", sc->res_w, sc->res_h);
+	sc->cur_cam = ft_olst_return_first_obj_id_by_type(&sc->olst, 'm');
+	printf("\ncur_cam: [%i]", sc->cur_cam);
 	if (close(fd) == -1)
 		return(ft_err_print(-19));
 	return (1);
