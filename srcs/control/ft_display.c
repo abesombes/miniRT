@@ -6,15 +6,47 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 22:57:30 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/09 16:20:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/13 21:57:51 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
+#include "../../includes/ft_olst.h"
 
-void    ft_display_vec(t_vector *v)
+void	ft_display_vec(t_vector *v)
 {
-    printf("\nv->x: %f - v->y: %f - v->z: %f\n", v->x, v->y, v->z);
+	printf("\nv->x: %f - v->y: %f - v->z: %f\n", v->x, v->y, v->z);
+}
+
+void	ft_print_olst(t_scene *sc)
+{
+	t_olst *tmp;
+	
+	tmp = sc->olst;
+	while (tmp)
+	{
+		printf("\n--------------------------------------");
+		printf("\nolst->obj_type: [%c]", tmp->obj_type);
+		printf("\n--------------------------------------\n");
+		printf("\nobj_id: [%i]", tmp->id);
+		if (tmp->obj_type == 'l')
+		{
+			printf("\nlight_intst: [%f]", tmp->light.intst);
+			ft_display_vec(&tmp->light.pos);
+		}
+		if (tmp->obj_type == 'm')
+		{
+			printf("\ncam_fov: [%f]", tmp->cam.fov);
+			ft_display_vec(&tmp->cam.pos);
+			ft_display_vec(&tmp->cam.orient);
+		}
+		if (tmp->obj_type == 's')
+		{
+			printf("\nsphere_radius: [%f]", tmp->sp.radius);
+			ft_display_vec(&tmp->sp.orig);
+		}
+		tmp = tmp->next;
+	}
 }
 /*
 void    ft_display_sp(t_sphere *s)

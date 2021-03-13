@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:26:41 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 17:03:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:11:42 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		ft_parse_square(char *line, t_scene *sc, int *obj_id);
 int		ft_parse_triangle(char *line, t_scene *sc, int *obj_id);
 
 /*------------------------ft_parse_fd_line_by_line.c--------------------------*/
-int 	ft_parse_fd_line_by_line(int fd, t_scene *sc);
+int		ft_parse_fd_line_by_line(int fd, t_scene *sc);
 
 /*------------------------ft_parse_open_rt_file.c-----------------------------*/
-int     ft_parse_control_min_requirements(t_scene *sc);
+int		ft_parse_control_min_requirements(t_scene *sc);
 int		ft_parse_open_rt_file(char *av, t_scene *sc);
 
 /*------------------------ft_parse_line_by_obj_type.c-------------------------*/
@@ -45,7 +45,8 @@ int		ft_parse_alight(char *line, t_scene *sc, int *obj_id);
 int		ft_parse_light(char *line, t_scene *sc, int *obj_id);
 
 /*---------------------------ft_parse_get_xyz_rgb.c---------------------------*/
-void    ft_get_rgb(char **line, t_olst *olst, int *err_code);
-void	ft_get_xyz(char **line, t_vector **vec, double *bounds, int *err_code);
+void	ft_get_rgb(char **line, t_olst *olst, int *err_code);
+void	ft_get_xyz(char **line, t_vector *vec, double *bounds, int *err_code);
+
 
 #endif

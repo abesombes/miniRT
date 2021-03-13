@@ -4,6 +4,7 @@
 		"ft_error.h": "c",
 		"ft_err_print.h": "c",
 		"ft_parse_get_next_line.h": "c",
-		"ft_parse.h": "c"
+		"ft_parse.h": "c",
+		"ft_olst.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 22:21:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/13 20:12:14 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,11 @@ typedef struct	s_scene
 	t_olst     	*olst;
 }				t_scene;
 
+/*--------------------------------init/ft_init.c-----------------------------*/
 int 		ft_init_sc(t_scene *sc);
+void 		ft_init_inter(t_inter *inter);
+
+void		ft_print_olst(t_scene *sc);
 int 		ft_control_args_file(int ac, char *av);
 t_vector 	*ft_vec(double x, double y, double z);
 void		ft_display_vec(t_vector *v);

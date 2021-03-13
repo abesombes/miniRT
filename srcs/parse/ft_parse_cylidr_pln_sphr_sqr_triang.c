@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 12:24:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 22:17:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:18:39 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	ft_parse_cylinder(char *line, t_scene *sc, int err_code, int *obj_id)
 	printf("------CYLINDER------\n");
 	printf("--------------------\n");
 	vec = &new_obj->cylinder.u;
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -16: err_code); 
 	vec = &new_obj->cylinder.v;
-	ft_get_xyz(&line, &vec, bounds, &err_code);
+	ft_get_xyz(&line, vec, bounds, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -10: err_code); 
 	ft_move_to_next_data(&line);
@@ -60,12 +60,12 @@ int	ft_parse_plane(char *line, t_scene *sc, int *obj_id)
 	printf("\n\n--------------------\n");
 	printf("------PLANE------\n");
 	printf("--------------------\n");
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	ft_display_vec(vec);
 	if (err_code)
 		return (err_code);
 	vec = &new_obj->plane.v;
-	ft_get_xyz(&line, &vec, bounds, &err_code);
+	ft_get_xyz(&line, vec, bounds, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -10: err_code); 
 	ft_display_vec(vec);
@@ -87,13 +87,13 @@ int	ft_parse_sphere(char *line, t_scene *sc, int *obj_id)
 	printf("\n\n--------------------\n");
 	printf("------SPHERE------\n");
 	printf("--------------------\n");
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	if (err_code)
 		return (err_code);
 	ft_display_vec(vec); 
 	ft_move_to_next_data(&line);
 	new_obj->sp.radius = ft_atoif(&line, &err_code);
-	printf("\nradius: %f", new_obj->sp.radius);
+	printf("\nradius: %f\n", new_obj->sp.radius);
 	if (new_obj->sp.radius < 0 || !err_code)
 		return (-12);
 	ft_get_rgb(&line, new_obj, &err_code);
@@ -115,12 +115,12 @@ int	ft_parse_square(char *line, t_scene *sc, int *obj_id)
 	printf("------SQUARE------\n");
 	printf("--------------------\n");
 	vec = &new_obj->square.u;
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	ft_display_vec(vec);
 	if (err_code)
 		return (err_code); 
 	vec = &new_obj->square.v;
-	ft_get_xyz(&line, &vec, bounds, &err_code);
+	ft_get_xyz(&line, vec, bounds, &err_code);
 	ft_display_vec(vec);
 	if (err_code)
 		return (err_code == -6 ? -10: err_code);
@@ -146,15 +146,15 @@ int	ft_parse_triangle(char *line, t_scene *sc, int *obj_id)
 	printf("\n\n--------------------\n");
 	printf("------TRIANGLE------\n");
 	printf("--------------------\n");
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -16: err_code); 
 	vec = &new_obj->tr.b;
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -16: err_code); 
 	vec = &new_obj->tr.c;
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
 	if (err_code)
 		return (err_code == -6 ? -16: err_code); 
 	ft_get_rgb(&line, new_obj, &err_code);

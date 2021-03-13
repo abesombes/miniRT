@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 14:04:36 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 22:27:29 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:15:10 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	ft_parse_res(char *line, t_scene *sc)
 	int nb_digits;
 
 	nb_digits = 0;
-	printf("\nsc->res_w_h: [%i, %i]", sc->res_w, sc->res_h);
+	printf("\n\n--------------------\n");
+	printf("------RES------\n");
+	printf("--------------------\n");
 	if (sc->res_w > 0 || sc->res_h > 0)
 		return (-3);
 	ft_move_to_next_data(&line);
@@ -29,6 +31,7 @@ int	ft_parse_res(char *line, t_scene *sc)
 	ft_move_to_next_data(&line);
 	if ((sc->res_h = ft_atoi(&line, &nb_digits)) <= 0  || !nb_digits)
 		return (-2);
+	printf("\nres: [%i, %i]", sc->res_w, sc->res_h);
 	return (0);
 }
 
@@ -40,18 +43,24 @@ int	ft_parse_cam(char *line, t_scene *sc, int *obj_id)
 	double	bounds[2] = {-1.0, 1.0};
 
 	err_code = 0;
+	printf("\n\n--------------------\n");
+	printf("------CAM------\n");
+	printf("--------------------\n");
 	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'm', obj_id)))
 		err_code = 12;
 	vec = &new_obj->cam.pos;
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
+	ft_display_vec(vec);
 	if (err_code)
 		return (err_code); 
 	vec = &new_obj->cam.orient;
-	ft_get_xyz(&line, &vec, bounds, &err_code);
+	ft_get_xyz(&line, vec, bounds, &err_code);
+	ft_display_vec(vec);
 	if (err_code)
 		return (err_code == -6 ? -10: err_code); 
 	ft_move_to_next_data(&line);
 	new_obj->cam.fov = ft_atoif(&line, &err_code);
+	printf("\ncam->fov: [%f]\n", new_obj->cam.fov);
 	if (!ft_within_range(new_obj->cam.fov, 0, 180) || !err_code)
 		return (-13);
 	return (0);
@@ -83,9 +92,13 @@ int	ft_parse_light(char *line, t_scene *sc, int *obj_id)
 	err_code = 0;
 	if (!(new_obj = ft_olst_pushback_obj(&sc->olst, 'l', obj_id)))
 		err_code = 12;
-	printf("\nLIGHT: [%c] - obj_id = [%i]", new_obj->obj_type, new_obj->id);
+	printf("\n\n--------------------\n");
+	printf("------LIGHT------\n");
+	printf("--------------------\n");
+	//printf("\nLIGHT: [%c] - obj_id = [%i]", new_obj->obj_type, new_obj->id);
 	vec = &new_obj->light.pos;
-	ft_get_xyz(&line, &vec, 0, &err_code);
+	ft_get_xyz(&line, vec, 0, &err_code);
+	ft_display_vec(vec);
 	if (err_code)
 		return (err_code); 
 	ft_move_to_next_data(&line);
