@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 00:53:23 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 22:40:39 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/13 10:50:29 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int ft_init_sc(t_scene *sc)
 {
 	sc->res_w = 0;
-	sc->res_h = 0;;
+	sc->res_h = 0;
 	return (1);
 }
