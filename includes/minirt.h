@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 19:01:11 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 22:29:59 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ typedef struct	s_inter
 	double sqr_dlight;
 	t_vector p;
 	t_vector n;
+	t_vector romspo;
+	double sqd_romspo;
+	t_vector rdt;
+	t_vector pspo;
 	t_cam cur_c;
 	t_light cur_l;
 	t_sphere cur_s;

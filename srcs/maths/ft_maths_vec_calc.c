@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:43:47 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 16:23:39 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:02:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ t_vector *ft_vec_add(t_vector *u, t_vector *v)
     return(w);
 }
 
+void ft_vec_a(t_vector *w, t_vector *u, t_vector *v)
+{
+    w->x = u->x + v->x;
+    w->y = u->y + v->y;
+    w->z = u->z + v->z;
+}
+
 t_vector *ft_vec_sub(t_vector *u, t_vector *v)
 {
     t_vector *w;
@@ -33,6 +40,13 @@ t_vector *ft_vec_sub(t_vector *u, t_vector *v)
     w->y = u->y - v->y;
     w->z = u->z - v->z;
     return(w);
+}
+
+void ft_vec_s(t_vector *w, t_vector *u, t_vector *v)
+{
+    w->x = u->x - v->x;
+    w->y = u->y - v->y;
+    w->z = u->z - v->z;
 }
 
 t_vector *ft_vec_cross(t_vector *u, t_vector *v)

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 10:14:51 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 22:31:56 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 {
 	inter->a = 1;
-	inter->b = 2 * ft_vec_mul(&r->dir, ft_vec_sub(&r->orig, &sp->orig));
-	inter->c = ft_vec_sqnorm(ft_vec_sub(&r->orig, &sp->orig)) - pow(sp->radius, 2);
+	ft_vec_s(&inter->romspo, &r->orig, &sp->orig); 
+	inter->b = 2 * ft_vec_mul(&r->dir, &inter->romspo);
+	inter->sqd_romspo = ft_vec_sqnorm(&inter->romspo);
+	inter->c = inter->sqd_romspo - pow(sp->radius, 2);
 	inter->delta = inter->b * inter->b - 4 * inter->a * inter->c;
 	if (inter->delta < 0)
 		return (0);
@@ -30,7 +32,9 @@ int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 		inter->t = inter->t1;
 	else
 		inter->t = inter->t2;
-	inter->p = *ft_vec_add(&r->orig, ft_vec_mul_scal(&r->dir, inter->t));
-	inter->n = *ft_vec_normvec(ft_vec_sub(&inter->p, &sp->orig));
+	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
+	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
+	ft_vec_s(&inter->pspo, &inter->p, &sp->orig);
+	inter->n = *ft_vec_normvec(&inter->pspo);
 	return (1);
 }

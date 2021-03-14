@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:30:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 20:20:49 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 20:22:22 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int ac, char **av)
 	mlx_key_hook(sc.mlx_win, ft_key_hook, sc.addr);
 	mlx_hook(sc.mlx_win, 17, 1, ft_close_win, sc.addr);
 	/*** ATTENTION 33 SOUS LINUX ***/
-	printf("\nac: [%i]", ac);
 	if (ac == 3 && !(ft_strcmp(av[2], "-save")))
 		ft_save_to_bmp("scene_export.bmp", (unsigned char *)sc.addr, sc.res_w, sc.res_h);
 	mlx_loop(sc.mlx);
