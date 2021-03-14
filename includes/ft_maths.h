@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 22:25:45 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 22:49:53 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		ft_vec_s(t_vector *w, t_vector *u, t_vector *v);
 double		ft_vec_sqnorm(t_vector *v);
 t_vector	*ft_vec_normvec(t_vector *v);
 void		ft_vec_norm(t_vector *v);
+void		ft_vec_nv(t_vector *w, t_vector *v);
 
 /*-----------------ft_maths_vec_scal_calc.c-------------------*/
 t_vector	*ft_vec_div_scal(t_vector *u, double a);

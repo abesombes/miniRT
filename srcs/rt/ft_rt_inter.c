@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 22:31:56 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 22:49:31 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
 	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
 	ft_vec_s(&inter->pspo, &inter->p, &sp->orig);
-	inter->n = *ft_vec_normvec(&inter->pspo);
+	ft_vec_nv(&inter->n, &inter->pspo);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 22:29:59 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 23:10:26 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,28 +103,31 @@ struct s_olst
 
 typedef struct	s_inter
 {
-	int has_junc;
-	double a;
-	double b;
-	double c;
-	double delta;
-	double t;
-	double t1;
-	double t2;
-	double min_t;
-	double sqr_dlight;
-	t_vector p;
-	t_vector n;
-	t_vector romspo;
-	double sqd_romspo;
-	t_vector rdt;
-	t_vector pspo;
-	t_cam cur_c;
-	t_light cur_l;
-	t_sphere cur_s;
-	int cur_s_id;
-	t_olst *sp_obj;
-	int count_sp;
+	int			has_junc;
+	double		a;
+	double		b;
+	double		c;
+	double		delta;
+	double		t;
+	double		t1;
+	double		t2;
+	double		min_t;
+	double		sqd_dlight;
+	t_vector	p;
+	t_vector	n;
+	t_vector	alpha_n;
+	t_vector	romspo;
+	double		sqd_romspo;
+	t_vector	lpp;
+	t_vector	norm_lpp;
+	t_vector	rdt;
+	t_vector	pspo;
+	t_cam		cur_c;
+	t_light		cur_l;
+	t_sphere	cur_s;
+	int			cur_s_id;
+	t_olst		*sp_obj;
+	int			count_sp;
 }				t_inter;
 
 typedef struct	s_scene
