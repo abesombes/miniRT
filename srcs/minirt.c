@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:30:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/13 13:08:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 10:41:55 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	if ((ft_control_args_file(ac, av[1]) == -1))
 		return (-1);
 	sc.mlx = mlx_init();
-	if (!ft_parse_open_rt_file(av[1], &sc))
+	if (!ft_parse_open_rt_file(av[1], &sc, &inter))
 		return (-1);
 	sc.mlx_win = mlx_new_window(sc.mlx, sc.res_w, sc.res_h, "miniRT - RayTracer Engine");
 	sc.img = mlx_new_image(sc.mlx, sc.res_w, sc.res_h);

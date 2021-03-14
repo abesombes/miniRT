@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 00:53:23 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/13 15:39:19 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 11:34:03 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int ft_init_sc(t_scene *sc)
 
 void ft_init_inter(t_inter *inter)
 {
-	inter->has_junc = 0;
 	inter->a = 0;
 	inter->b = 0;
 	inter->c = 0;

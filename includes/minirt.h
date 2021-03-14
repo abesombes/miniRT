@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/13 20:12:14 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 13:04:19 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@ typedef struct  s_vector {
 	double     z;
 }               t_vector;
 
-typedef struct	s_inter
-{
-	int has_junc;
-	double a;
-	double b;
-	double c;
-	double delta;
-	double t;
-	double t1;
-	double t2;
-	t_vector p;
-	t_vector n;
-}				t_inter;
 
 typedef	struct	s_light
 {
@@ -113,6 +100,30 @@ struct s_olst
 	t_vector	rgb;
 	t_olst		*next;
 };
+
+typedef struct	s_inter
+{
+	int has_junc;
+	double a;
+	double b;
+	double c;
+	double delta;
+	double t;
+	double t1;
+	double t2;
+	t_vector p;
+	t_vector n;
+	t_cam cur_c;
+	t_light cur_l;
+	t_sphere cur_s;
+	int cur_s_id;
+	t_olst *sp_obj;
+	int count_sp;
+	int min_has_junc;
+	t_vector min_p;
+	t_vector min_n;
+	double min_t;
+}				t_inter;
 
 typedef struct	s_scene
 {

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/13 23:34:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 13:09:48 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,41 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 {
 	int i;
 	int j;
-	t_cam cur_c;
-	t_light cur_l;
-	t_sphere cur_s;
-	t_olst *sp_obj;
+	int k;
 	
+	// printf("\nnb of sph: [%i]", inter->count_sp);
 	j = 0;
-	cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
-	cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
-	sp_obj = ft_olst_return_first_obj_by_type(&sc->olst, 's');
-	cur_s = (ft_olst_return_first_obj_by_type(&sc->olst, 's'))->sp;
+	inter->cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
+	inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
 	while (j < sc->res_h)
 	{
 		i = 0;
 		while (i < sc->res_w)
 		{
-			ft_vec_set(&sc->ray.dir, i - sc->res_w / 2, j - sc->res_h / 2, -sc->res_w / (2 * tan(cur_c.fov / 200)));
+			inter->has_junc = 0;
+			inter->cur_s_id = 0;
+			ft_vec_set(&sc->ray.dir, i - sc->res_w / 2, j - sc->res_h / 2, -sc->res_w / (2 * tan(inter->cur_c.fov / 200)));
 			ft_vec_norm(&sc->ray.dir);
-			ft_vec_cpy(&sc->ray.orig, &cur_c.pos);
+			ft_vec_cpy(&sc->ray.orig, &inter->cur_c.pos);
 			ft_ray_set(&sc->ray, &sc->ray.orig, &sc->ray.dir);
 			ft_vec_set(&sc->pix_int, 0., 0., 0.);
-			ft_init_inter(inter);
-			inter->has_junc = ft_rt_inter(&sc->ray, &cur_s, inter);
-			if (inter->has_junc)
+			k = 0;
+			inter->min_t = 1E99;
+			while (k < inter->count_sp)
 			{
-				sc->pix_int = *ft_vec_mul_scal(&sp_obj->rgb, 20000000 * cur_l.intst * fmax(0, ft_vec_mul(ft_vec_normvec(ft_vec_sub(&cur_l.pos, &inter->p)), &inter->n) / ft_vec_sqnorm(ft_vec_sub(&cur_l.pos, &inter->p))));
+				if (!(inter->sp_obj = ft_olst_return_next_obj(&sc->olst, inter->cur_s_id)))
+					break ;
+				inter->cur_s = inter->sp_obj->sp;
+				inter->cur_s_id = inter->sp_obj->id;
+			//	printf("\nk: [%i] - cur_s_id: [%i]", k, inter->cur_s_id);
+				ft_init_inter(inter);
+				inter->has_junc = ft_rt_inter(&sc->ray, &inter->cur_s, inter);
+				if (inter->has_junc)
+					sc->pix_int = *ft_vec_mul_scal(&inter->sp_obj->rgb, 20000000 * inter->cur_l.intst * fmax(0, ft_vec_mul(ft_vec_normvec(ft_vec_sub(&inter->cur_l.pos, &inter->p)), &inter->n) / ft_vec_sqnorm(ft_vec_sub(&inter->cur_l.pos, &inter->p))));
+				sc->pix_color = ((int)round(fmin(fmax(pow(sc->pix_int.x, 0.4545), 0), 255)) + 0) << 16 | ((int)round(fmin(fmax(pow(sc->pix_int.y, 0.4545), 0), 255)) + 0) << 8 | ((int)round(fmin(fmax(pow(sc->pix_int.z, 0.4545), 0), 255)));
+				ft_render_pixel_put(sc, i, sc->res_h - j - 1, sc->pix_color);
+				k++;
 			}
-			sc->pix_color = ((int)round(fmin(fmax(pow(sc->pix_int.x, 0.4545), 0), 255)) + 0) << 16 | ((int)round(fmin(fmax(pow(sc->pix_int.y, 0.4545), 0), 255)) + 0) << 8 | ((int)round(fmin(fmax(pow(sc->pix_int.z, 0.4545), 0), 255)));
-			ft_render_pixel_put(sc, i, sc->res_h - j - 1, sc->pix_color);
 			i++;
 		}
 		j++;
