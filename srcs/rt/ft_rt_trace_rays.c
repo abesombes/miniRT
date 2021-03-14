@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 00:27:31 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 00:33:29 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 				}
 				sc->k++;
 			}
+			// printf("\ninter_n:");
+			// ft_display_vec(&inter->n);
+			// printf("\ninter_min_n:");
+			// ft_display_vec(&inter->min_n);
 			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.01);
 			ft_vec_a(&sc->ray_light.orig, &inter->min_p, &inter->alpha_n);
 			//printf("\nRAYLIGHT->origin:");
