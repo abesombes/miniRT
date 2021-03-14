@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 23:28:42 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 00:18:49 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter)
 		inter->cur_l.intst * fmax(0, ft_vec_mul(ft_vec_normvec(\
 			ft_vec_sub(&inter->cur_l.pos, &inter->p)), &inter->n) \
 				/ ft_vec_sqnorm(ft_vec_sub(&inter->cur_l.pos, &inter->p))));
+	ft_vec_cpy(&inter->min_p, &inter->p);
+	ft_vec_cpy(&inter->min_n, &inter->n);
 }
 
 void ft_rt_calc_pix_color(t_scene *sc)
@@ -62,7 +64,7 @@ void ft_rt_calc_pix_color(t_scene *sc)
 
 void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 {
-	//t_inter inter_l;
+	t_inter inter_l;
 	
 	ft_rt_select_cur_cam_light(sc, inter);
 	while (++sc->j < sc->res_h)
@@ -79,21 +81,28 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 				ft_rt_select_next_sp(inter);
 				if ((inter->has_junc = ft_rt_inter(&sc->ray, &inter->cur_s, inter)))
 				{
-					/*ft_vec_ms(&inter->alpha_n, &inter->n, 0.01);
-					ft_vec_a(&sc->ray_light.orig, &inter->p, &inter->alpha_n);
-					ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->p);
-					ft_vec_nv(&inter->norm_lpp, &inter->lpp);
-					ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
-					inter_l.has_junc = ft_rt_inter(&sc->ray_light, &inter->cur_s, &inter_l);
-					inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
-					ft_vec_nul(&sc->pix_int);
-					if (!(inter_l.has_junc && pow(inter_l.t, 2) < inter_l.sqd_dlight))*/
 						if (inter->t < inter->min_t)
 							ft_rt_save_min_t_pix_int(sc, inter);
 				}
 				sc->k++;
 			}
-			ft_rt_calc_pix_color(sc);
+			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.01);
+			ft_vec_a(&sc->ray_light.orig, &inter->min_p, &inter->alpha_n);
+			//printf("\nRAYLIGHT->origin:");
+			//ft_display_vec(&sc->ray_light.orig);
+			//printf("\nCUR_L.POS:");
+			//ft_display_vec(&inter->cur_l.pos);
+			ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
+			ft_vec_nv(&inter->norm_lpp, &inter->lpp);
+			ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
+			inter_l.has_junc = ft_rt_inter(&sc->ray_light, &inter->cur_s, &inter_l);
+			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
+			if (inter_l.has_junc)
+				printf("\nIntersection du Rayon de Lumiere avec une forme: [%i]",inter_l.has_junc);
+			if ((inter_l.has_junc && pow(inter_l.t, 2) < inter_l.sqd_dlight))
+				ft_vec_nul(&sc->pix_int);
+			else
+				ft_rt_calc_pix_color(sc);
 			ft_render_pixel_put(sc, sc->i, sc->res_h - sc->j - 1, sc->pix_color);
 		}
 	}

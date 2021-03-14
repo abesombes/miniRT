@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 23:10:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 00:14:09 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ typedef struct	s_inter
 	int			cur_s_id;
 	t_olst		*sp_obj;
 	int			count_sp;
+	t_vector	min_p;
+	t_vector	min_n;
 }				t_inter;
 
 typedef struct	s_scene
