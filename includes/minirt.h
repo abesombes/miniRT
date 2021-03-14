@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 17:07:59 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 18:09:53 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct	s_scene
 	t_vector	pix_int;
 	int			pix_color;
 	t_ray		ray;
+	t_ray		ray_light;
 	t_olst     	*olst;
 }				t_scene;
 
