@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 09:43:11 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/08 15:05:13 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:56:47 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	ft_control_rt_file_format(char *str)
 	return (0);
 }
 
-int ft_control_args_file(int ac, char *av)
+int ft_control_args_file(int ac, char **av)
 {
- 	if (ac != 2)
+ 	if (ac != 2 && (ft_strcmp(av[2], "-save")))
 		return (ft_err_print(-17));
-	if (!ft_control_rt_file_format(av))
+	if (!ft_control_rt_file_format(av[1]))
 		ft_err_print(-4);
-	if (ft_control_is_directory(av))
+	if (ft_control_is_directory(av[1]))
 		ft_err_print(-5);
 	return (1);
 }

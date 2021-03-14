@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 16:14:16 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:07:59 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,9 @@ typedef struct	s_inter
 
 typedef struct	s_scene
 {
+	int			i;
+	int			j;
+	int 		k;
 	void		*mlx;
 	void		*mlx_win;
 	void        *img;
@@ -147,7 +150,7 @@ int 		ft_init_sc(t_scene *sc);
 void 		ft_init_inter(t_inter *inter);
 
 void		ft_print_olst(t_scene *sc);
-int 		ft_control_args_file(int ac, char *av);
+int 		ft_control_args_file(int ac, char **av);
 t_vector 	*ft_vec(double x, double y, double z);
 void		ft_display_vec(t_vector *v);
 int			ft_close_win(char *p);
