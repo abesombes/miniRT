@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 18:09:53 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 19:01:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct	s_inter
 	double t1;
 	double t2;
 	double min_t;
+	double sqr_dlight;
 	t_vector p;
 	t_vector n;
 	t_cam cur_c;

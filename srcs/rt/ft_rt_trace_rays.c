@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 18:33:37 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 19:46:00 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void ft_rt_calc_pix_color(t_scene *sc)
 
 void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 {
+	// t_inter inter_l;
+	
 	ft_rt_select_cur_cam_light(sc, inter);
 	while (++sc->j < sc->res_h)
 	{
@@ -77,7 +79,13 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 				ft_rt_select_next_sp(inter);
 				if ((inter->has_junc = ft_rt_inter(&sc->ray, &inter->cur_s, inter)))
 				{
-					if (inter->t < inter->min_t)
+					/*ft_vec_cpy(&sc->ray_light.orig, ft_vec_add(&inter->p, ft_vec_mul_scal(&inter->n, 0.01)));
+					ft_vec_cpy(&sc->ray_light.dir, ft_vec_normvec(ft_vec_sub(&inter->cur_l.pos, &inter->p)));
+					inter_l.has_junc = ft_rt_inter(&sc->ray_light, &inter->cur_s, &inter_l);
+					inter_l.sqr_dlight = ft_vec_sqnorm(ft_vec_sub(&inter->cur_l.pos, &inter->p));
+					if (inter_l.has_junc && pow(inter_l.t, 2) < inter_l.sqr_dlight)
+						ft_vec_nul(&sc->pix_int);
+					else */if (inter->t < inter->min_t)
 						ft_rt_save_min_t_pix_int(sc, inter);
 				}
 				sc->k++;
