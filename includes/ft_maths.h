@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 11:37:25 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 16:23:24 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ double      ft_vec_mul(t_vector *u, t_vector *v);
 
 /*-----------------ft_maths_vec.c-----------------------------*/
 void        ft_vec_set(t_vector *v, double x, double y, double z);
+void		ft_vec_nul(t_vector *v);
 t_vector    *ft_vec(double x, double y, double z);
 t_vector    *ft_vec_dup(t_vector *v);
 void		ft_vec_cpy(t_vector *vec1, t_vector *vec2);

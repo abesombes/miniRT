@@ -6,21 +6,31 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 22:52:05 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/12 11:34:06 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/14 16:22:32 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_maths.h"
 
-void        ft_vec_set(t_vector *v, double x, double y, double z)
+void		ft_vec_set(t_vector *v, double x, double y, double z)
 {
 	v->x = x;
 	v->y = y;
 	v->z = z;
 }
 
-t_vector    *ft_vec(double x, double y, double z)
+void		ft_vec_nul(t_vector *v)
+{
+	double zero;
+	zero = 0.0;
+	
+	v->x = zero;
+	v->y = zero;
+	v->z = zero;
+}
+
+t_vector	*ft_vec(double x, double y, double z)
 {
 	t_vector *u;
 
@@ -39,7 +49,7 @@ void		ft_vec_cpy(t_vector *vec1, t_vector *vec2)
 	vec1->z = vec2->z;
 }
 
-t_vector    *ft_vec_dup(t_vector *v)
+t_vector	*ft_vec_dup(t_vector *v)
 {
 	t_vector *w;
 
