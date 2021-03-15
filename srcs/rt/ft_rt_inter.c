@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 13:18:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:37:28 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 	return (1);
 }
 
-int ft_rt_inter_all(t_scene *sc, t_inter *inter)
+int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter)
 {
 	inter->count_sp = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
 	sc->k = 0;
@@ -51,30 +51,7 @@ int ft_rt_inter_all(t_scene *sc, t_inter *inter)
 			inter->cur_s_id, 's')))
 			break ;
 		ft_rt_select_next_sp(inter);
-		if ((inter->has_junc = ft_rt_inter(&sc->ray, &inter->cur_s, inter)))
-		{
-				if (inter->t < inter->min_t)
-					ft_rt_save_min_t_pix_int(sc, inter);
-		}
-		sc->k++;
-	}
-	if(inter->min_t != 1E10)
-		return (1);
-	return (0);
-}
-
-int ft_rt_inter_rl_all(t_scene *sc, t_inter *inter)
-{
-	inter->count_sp = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
-	sc->k = 0;
-	inter->min_t = 1E10;
-	while (sc->k < inter->count_sp)
-	{
-		if (!(inter->sp_obj = ft_olst_return_next_obj(&sc->olst, \
-			inter->cur_s_id, 's')))
-			break ;
-		ft_rt_select_next_sp(inter);
-		if ((inter->has_junc = ft_rt_inter(&sc->ray_light, &inter->cur_s, inter)))
+		if ((inter->has_junc = ft_rt_inter(ray, &inter->cur_s, inter)))
 		{
 				if (inter->t < inter->min_t)
 					ft_rt_save_min_t_pix_int(sc, inter);

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 13:19:13 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 15:46:04 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void ft_rt_init_ray(t_scene *sc, t_inter *inter)
 	ft_vec_norm(&sc->ray.dir);
 	ft_vec_cpy(&sc->ray.orig, &inter->cur_c.pos);
 	ft_ray_set(&sc->ray, &sc->ray.orig, &sc->ray.dir);
-	ft_vec_nul(&sc->pix_int);
 }
 
 void ft_rt_select_next_sp(t_inter *inter)
@@ -70,18 +69,21 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 		while (++sc->i < sc->res_w)
 		{
 			ft_rt_init_ray(sc, inter);
-			ft_rt_inter_all(sc, inter);
+			ft_vec_nul(&sc->pix_int);
+			ft_rt_inter_all(sc, &sc->ray, inter);
 			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.01);
 			ft_vec_a(&sc->ray_light.orig, &inter->min_p, &inter->alpha_n);
 			ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
 			ft_vec_nv(&inter->norm_lpp, &inter->lpp);
 			ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
-			inter_l.has_junc = ft_rt_inter_rl_all(sc, &inter_l);
-			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
-			if ((inter_l.has_junc && pow(inter_l.t, 2) < inter_l.sqd_dlight))
+			ft_init_inter(&inter_l);
+			inter_l.cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id - 1;
+			inter_l.has_junc = ft_rt_inter_all(sc, &sc->ray_light, &inter_l);
+			// inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
+		//	if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))
 //				printf("\nINTERSECT");
-				ft_vec_nul(&sc->pix_int);
-			else
+			//	ft_vec_nul(&sc->pix_int);
+		//	else
 				ft_rt_calc_pix_color(sc);
 			ft_render_pixel_put(sc, sc->i, sc->res_h - sc->j - 1, sc->pix_color);
 		}

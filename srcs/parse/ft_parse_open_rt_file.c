@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 10:40:45 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 14:19:38 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,12 @@ int	ft_parse_open_rt_file(char *av, t_scene *sc, t_inter *inter)
 		return(ft_err_print(12));
 	if (!(ft_parse_control_min_requirements(sc, inter)))
 		return(ft_err_print(-20));
-//	printf("\nsc.res: [%d, %d]", sc->res_w, sc->res_h);
 	mlx_get_screen_size(sc->mlx_win, &sc->scr_w, &sc->scr_h);
-//	printf("\neffective screen res: [%d, %d]", sc->scr_w, sc->scr_h);
 	if (sc->res_w > sc->scr_w)
 		sc->res_w = sc->scr_w;
 	if (sc->res_h > sc->scr_h)
 		sc->res_h = sc->scr_h;
-//	printf("\nsc.res: [%d, %d]", sc->res_w, sc->res_h);
 	sc->cur_cam = ft_olst_return_first_obj_id_by_type(&sc->olst, 'm');
-//	printf("\ncur_cam: [%i]", sc->cur_cam);
-//	printf("\ncur_sph: [%i]", ft_olst_return_first_obj_id_by_type(&sc->olst, 's'));
-//	printf("\ncur_light: [%i]", ft_olst_return_first_obj_id_by_type(&sc->olst, 'l'));
 	if (close(fd) == -1)
 		return(ft_err_print(-19));
 	return (1);
