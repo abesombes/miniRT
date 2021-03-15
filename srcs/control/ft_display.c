@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 22:57:30 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/13 21:57:51 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:16:38 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,30 @@
 void	ft_display_vec(t_vector *v)
 {
 	printf("\nv->x: %f - v->y: %f - v->z: %f\n", v->x, v->y, v->z);
+}
+
+void	ft_display_sc(t_scene *sc)
+{
+	printf("\n-----------------------------------------");
+	printf("\n----------------SCENE--------------------");
+	printf("\n-----------------------------------------");
+	printf("\ni: [%i]", sc->i);
+	printf("\nj: [%i]", sc->j);	
+	printf("\nk: [%i]", sc->k);
+	printf("\ncur_cam: [%i]", sc->cur_cam);
+	printf("\npix_int:");
+	ft_display_vec(&sc->pix_int);
+	printf("\npix_color: [%i]", sc->pix_color);
+	printf("\nray->orig:");
+	ft_display_vec(&sc->ray.orig);
+	printf("\nray->dir:");
+	ft_display_vec(&sc->ray.dir);
+	printf("\nray_light->orig:");
+	ft_display_vec(&sc->ray_light.orig);
+	printf("\nray_light->dir:");
+	ft_display_vec(&sc->ray_light.dir);
+	printf("\nolst:");
+	ft_print_olst(sc);
 }
 
 void	ft_print_olst(t_scene *sc)
@@ -58,12 +82,12 @@ void    ft_display_tr(t_triangle *t)
 {
     printf("\nt->a: [%f, %f, %f] - t->b: [%f, %f, %f] - t->c: [%f, %f, %f]", t->a->x, t->a->y, t->a->z, t->b->x, t->b->y, t->b->z, t->c->x, t->c->y, t->c->z);
 }
-
+*/
 void    ft_display_ray(t_ray *r)
 {
-    printf("\nr->origin->x: %f - r->origin->y: %f - r->origin->z: %f - r->direction->x: %f - r->direction->y: %f - r->direction->z: %f", r->origin->x, r->origin->y, r->origin->z, r->direction->x, r->direction->y, r->direction->z);
+    printf("\nr->origin->x: %f - r->origin->y: %f - r->origin->z: %f - r->direction->x: %f - r->direction->y: %f - r->direction->z: %f", r->orig.x, r->orig.y, r->orig.z, r->dir.x, r->dir.y, r->dir.z);
 }
-
+/*
 void    ft_display_light(t_light *light)
 {
     printf("\nlight->light_pos->x: %f - light->light_pos->y: %f - light->light_pos->z: %f - light->light_int: %f", light->light_pos->x, light->light_pos->y, light->light_pos->z, light->light_int);

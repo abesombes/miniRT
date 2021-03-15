@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 15:46:04 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:31:44 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 #include "../../includes/ft_render.h"
 #include "../../includes/ft_maths.h"
 #include "../includes/ft_olst.h"
+
+void ft_display_inter(t_inter *inter)
+{
+	printf("\n---------------------------------------");
+	printf("\n---------------------------------------");
+	printf("\nhas_junc: [%i]", inter->has_junc);
+	printf("\na: [%f]", inter->a);
+	printf("\nb: [%f]", inter->b);
+	printf("\nc: [%f]", inter->c);
+	printf("\ndelta: [%f]", inter->delta);
+	printf("\nt: [%f]", inter->t);
+	printf("\nt1: [%f]", inter->t1);
+	printf("\nt2: [%f]", inter->t2);
+	printf("\nmin_t: [%f]", inter->min_t);
+	printf("\nsqd_dlight: [%f]", inter->sqd_dlight);
+}
 
 void ft_rt_select_cur_cam_light(t_scene *sc, t_inter *inter)
 {
@@ -50,6 +66,14 @@ void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter)
 	ft_vec_cpy(&inter->min_n, &inter->n);
 }
 
+void ft_rt_save_min_t(t_inter *inter)
+{
+	inter->min_t = inter->t;
+	ft_vec_cpy(&inter->min_p, &inter->p);
+	ft_vec_cpy(&inter->min_n, &inter->n);
+}
+
+
 void ft_rt_calc_pix_color(t_scene *sc)
 {
 		sc->pix_color = ((int)round(fmin(fmax(pow(sc->pix_int.x, 0.4545), 0), \
@@ -77,14 +101,23 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_vec_nv(&inter->norm_lpp, &inter->lpp);
 			ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
 			ft_init_inter(&inter_l);
+			inter_l.min_t = 1E10;
 			inter_l.cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id - 1;
-			inter_l.has_junc = ft_rt_inter_all(sc, &sc->ray_light, &inter_l);
-			// inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
-		//	if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))
-//				printf("\nINTERSECT");
-			//	ft_vec_nul(&sc->pix_int);
-		//	else
-				ft_rt_calc_pix_color(sc);
+			// printf("\n---------------------------------------");
+			// printf("\n---------------------------------------");
+			// printf("\nINTER @[%i,%i]:", sc->i, sc->j);
+			// ft_display_inter(inter);
+			// printf("\n---------------------------------------");
+			// printf("\n---------------------------------------");
+			// printf("\nINTER_L @[%i,%i]:", sc->i, sc->j);;
+			// ft_display_inter(&inter_l);
+		//	printf("\n----------BEFOREEEEEEEE--------------");
+		//	ft_display_sc(sc);
+			inter_l.has_junc = ft_rt_inter_rl_all(sc, &sc->ray_light, &inter_l);
+			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
+			if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))
+				ft_vec_nul(&sc->pix_int);
+			ft_rt_calc_pix_color(sc);
 			ft_render_pixel_put(sc, sc->i, sc->res_h - sc->j - 1, sc->pix_color);
 		}
 	}
