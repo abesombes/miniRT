@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 22:49:53 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 10:57:30 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ void		ft_vec_nul(t_vector *v);
 t_vector	*ft_vec(double x, double y, double z);
 t_vector	*ft_vec_dup(t_vector *v);
 void		ft_vec_cpy(t_vector *vec1, t_vector *vec2);
+
+void    ft_sp_cpy(t_sphere *sp1, t_sphere *sp2);
 
 #endif

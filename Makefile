@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/12 20:45:09 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/15 10:56:58 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC =			minirt.c \
 				export/ft_export_bmp.c \
 				init/ft_init.c \
 				maths/ft_maths_arr_val_in_range.c \
+				maths/ft_maths_sp.c \
 				maths/ft_maths_vec_calc.c \
 				maths/ft_maths_vec_norm.c \
 				maths/ft_maths_vec_scal_calc.c \

@@ -6,13 +6,14 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 22:49:31 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:17:24 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 #include "../../includes/ft_rt.h"
 #include "../../includes/ft_maths.h"
+#include "../../includes/ft_olst.h"
 
 int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 {
@@ -37,4 +38,21 @@ int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 	ft_vec_s(&inter->pspo, &inter->p, &sp->orig);
 	ft_vec_nv(&inter->n, &inter->pspo);
 	return (1);
+}
+
+void ft_inter_all(t_scene *sc, t_inter *inter)
+{
+	while (sc->k < inter->count_sp)
+	{
+		if (!(inter->sp_obj = ft_olst_return_next_obj(&sc->olst, \
+			inter->cur_s_id, 's')))
+			break ;
+		ft_rt_select_next_sp(inter);
+		if ((inter->has_junc = ft_rt_inter(&sc->ray, &inter->cur_s, inter)))
+		{
+				if (inter->t < inter->min_t)
+					ft_rt_save_min_t_pix_int(sc, inter);
+		}
+		sc->k++;
+	}
 }
