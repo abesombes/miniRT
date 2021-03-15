@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 12:52:34 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 13:19:13 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 
 void ft_rt_select_cur_cam_light(t_scene *sc, t_inter *inter)
 {
-	sc->j = -1;
 	inter->cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
 	inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
 }
 
 void ft_rt_init_ray(t_scene *sc, t_inter *inter)
 {
-	inter->min_t = 1E10;
 	inter->cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id - 1;
 	ft_vec_set(&sc->ray.dir, sc->i - sc->res_w / 2, sc->j - sc->res_h / 2, \
 		-sc->res_w / (2 * tan(inter->cur_c.fov / 200)));
@@ -33,7 +31,6 @@ void ft_rt_init_ray(t_scene *sc, t_inter *inter)
 	ft_vec_cpy(&sc->ray.orig, &inter->cur_c.pos);
 	ft_ray_set(&sc->ray, &sc->ray.orig, &sc->ray.dir);
 	ft_vec_nul(&sc->pix_int);
-	sc->k = 0;
 }
 
 void ft_rt_select_next_sp(t_inter *inter)
@@ -64,8 +61,8 @@ void ft_rt_calc_pix_color(t_scene *sc)
 
 void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 {
-	// t_inter inter_l;
-	
+	t_inter inter_l;
+	sc->j = -1;
 	ft_rt_select_cur_cam_light(sc, inter);
 	while (++sc->j < sc->res_h)
 	{
@@ -79,11 +76,12 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
 			ft_vec_nv(&inter->norm_lpp, &inter->lpp);
 			ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
-		/*	inter_l.has_junc = ft_rt_inter_rl_all(sc, &inter_l);
+			inter_l.has_junc = ft_rt_inter_rl_all(sc, &inter_l);
 			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
 			if ((inter_l.has_junc && pow(inter_l.t, 2) < inter_l.sqd_dlight))
+//				printf("\nINTERSECT");
 				ft_vec_nul(&sc->pix_int);
-			else*/
+			else
 				ft_rt_calc_pix_color(sc);
 			ft_render_pixel_put(sc, sc->i, sc->res_h - sc->j - 1, sc->pix_color);
 		}

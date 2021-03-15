@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 12:32:40 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 13:18:44 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
 
 int ft_rt_inter_all(t_scene *sc, t_inter *inter)
 {
+	inter->count_sp = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
+	sc->k = 0;
+	inter->min_t = 1E10;
 	while (sc->k < inter->count_sp)
 	{
 		if (!(inter->sp_obj = ft_olst_return_next_obj(&sc->olst, \
@@ -62,6 +65,9 @@ int ft_rt_inter_all(t_scene *sc, t_inter *inter)
 
 int ft_rt_inter_rl_all(t_scene *sc, t_inter *inter)
 {
+	inter->count_sp = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
+	sc->k = 0;
+	inter->min_t = 1E10;
 	while (sc->k < inter->count_sp)
 	{
 		if (!(inter->sp_obj = ft_olst_return_next_obj(&sc->olst, \
