@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 16:47:25 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/16 15:45:40 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,25 @@ int ft_olst_count_obj_by_obj_type(t_olst **olst, char obj_type)
 	return (count);
 }
 
+int ft_olst_count_obj_by_obj_group_type(t_olst **olst, char *obj_type)
+{
+	int count;
+	int i;
+	t_olst *tmp = NULL;
+	
+	count = 0;
+	tmp = *olst;
+	while (tmp)
+	{
+		i = -1;
+		while (obj_type[++i])
+			if (tmp->obj_type == obj_type[i])
+				count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
 t_olst *ft_olst_return_obj_by_id(t_olst **olst, int obj_id)
 {
 	t_olst *tmp;
@@ -84,6 +103,29 @@ t_olst *ft_olst_return_next_obj(t_olst **olst, int min_i, char otype)
 	while (tmp && (tmp->id <= min_i || tmp->obj_type != otype))
 		tmp = tmp->next;
 	if (tmp && tmp->obj_type > min_i)
+		return (tmp);
+	return (NULL);
+}
+
+int ft_is_char_within_str(char *str, char c)
+{
+	int i;
+	
+	i = -1;
+	while (str && str[++i])
+		if (str[i] == c)
+			return (1);
+	return (0);
+}
+
+t_olst *ft_olst_return_next_obj_from_group(t_olst **olst, int min_i, char *otype)
+{
+	t_olst *tmp;
+	
+	tmp = *olst;
+	while (tmp && (tmp->id <= min_i || ft_is_char_within_str(tmp->obj_type, otype))
+		tmp = tmp->next;
+	if (tmp && tmp->obj_type > min_i && ft_is_char_within_str(tmp->obj_type, otype))
 		return (tmp);
 	return (NULL);
 }

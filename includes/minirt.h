@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 18:17:11 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/16 15:30:06 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ typedef struct	s_inter
 	double		t2;
 	double		min_t;
 	double		sqd_dlight;
+	int			count_obj;
+	t_olst		*next_obj;
+	int			cur_obj_id;
+
+	/* ---------SPHERE-------------*/
 	t_vector	p;
 	t_vector	n;
 	t_vector	alpha_n;
@@ -127,10 +132,28 @@ typedef struct	s_inter
 	t_sphere	cur_s;
 	int			cur_s_id;
 	t_olst		*sp_obj;
-	int			count_sp;
 	t_vector	min_p;
 	t_vector	min_n;
 	t_sphere	min_cur_s;
+
+	/* ---------TRIANGLE-------------*/
+	t_vector	u;
+	t_vector	v;
+	t_vector	uxv;
+	t_vector	w;
+	double		m11;
+	double		m12;
+	double		m22;
+	double		detm;
+	double 		b11;
+	double 		b21;	
+	double		detb;
+	double		beta;
+	double		g12;
+	double		g22;
+	double		detg;
+	double		gamma;
+	double		alpha;
 }				t_inter;
 
 typedef struct	s_scene

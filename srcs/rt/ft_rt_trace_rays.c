@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 21:31:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/16 14:22:32 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_rt_init_ray(sc, inter);
 			ft_vec_nul(&sc->pix_int);
 			ft_rt_inter_all(sc, &sc->ray, inter);
-			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.01);
+			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.00001);
 			ft_vec_a(&sc->ray_light.orig, &inter->min_p, &inter->alpha_n);
 			ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
 			ft_vec_nv(&inter->norm_lpp, &inter->lpp);
@@ -103,16 +103,6 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_init_inter(&inter_l);
 			inter_l.min_t = 1E10;
 			inter_l.cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id - 1;
-			// printf("\n---------------------------------------");
-			// printf("\n---------------------------------------");
-			// printf("\nINTER @[%i,%i]:", sc->i, sc->j);
-			// ft_display_inter(inter);
-			// printf("\n---------------------------------------");
-			// printf("\n---------------------------------------");
-			// printf("\nINTER_L @[%i,%i]:", sc->i, sc->j);;
-			// ft_display_inter(&inter_l);
-		//	printf("\n----------BEFOREEEEEEEE--------------");
-		//	ft_display_sc(sc);
 			inter_l.has_junc = ft_rt_inter_rl_all(sc, &sc->ray_light, &inter_l);
 			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
 			if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 10:57:30 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/16 14:30:56 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			ft_within_range(double nb, double min_b, double max_b);
 /*-----------------ft_maths_vec_calc.c------------------------*/
 t_vector	*ft_vec_add(t_vector *u, t_vector *v);
 t_vector	*ft_vec_sub(t_vector *u, t_vector *v);
-t_vector	*ft_vec_cross(t_vector *u, t_vector *v);
+void        ft_vec_cross(t_vector *w, t_vector *u, t_vector *v);
 t_vector	*ft_vec_mul_vec(t_vector *u, t_vector *v);
 t_vector	*ft_vec_div(t_vector *u, t_vector *v);
 void		ft_vec_a(t_vector *w, t_vector *u, t_vector *v);
