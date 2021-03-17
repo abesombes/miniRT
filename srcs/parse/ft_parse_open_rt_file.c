@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/15 14:19:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:47:51 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 #include "../../includes/ft_olst.h"
 #include "../../includes/ft_maths.h"
 
-int	ft_parse_control_min_requirements(t_scene *sc, t_inter *inter)
+int	ft_parse_control_min_requirements(t_scene *sc)
 {
 	//	printf("\ncurrent obj: [%c]", sc->olst->obj_type);
 	// printf("\nnb of alight objs: [%i]", ft_olst_count_obj_by_obj_type(&sc->olst, 'a'));
 	// printf("\nnb of light objs: [%i]", ft_olst_count_obj_by_obj_type(&sc->olst, 'l'));
 	// printf("\nnb of cam objs: [%i]\n", ft_olst_count_obj_by_obj_type(&sc->olst, 'm'));
-	inter->count_sp = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
+	//inter->count_sp = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
 	// printf("res: [%i, %i]\n", sc->res_w, sc->res_h);
 	if ((ft_olst_count_obj_by_obj_type(&sc->olst, 'a') > 0 
 		|| ft_olst_count_obj_by_obj_type(&sc->olst, 'l') > 0) && 
@@ -32,7 +32,7 @@ int	ft_parse_control_min_requirements(t_scene *sc, t_inter *inter)
 	return (0);
 }
 
-int	ft_parse_open_rt_file(char *av, t_scene *sc, t_inter *inter)
+int	ft_parse_open_rt_file(char *av, t_scene *sc)
 {
 	int fd;
 	
@@ -42,7 +42,7 @@ int	ft_parse_open_rt_file(char *av, t_scene *sc, t_inter *inter)
 	ft_init_sc(sc);
 	if (!(ft_parse_fd_line_by_line(fd, sc)))
 		return(ft_err_print(12));
-	if (!(ft_parse_control_min_requirements(sc, inter)))
+	if (!(ft_parse_control_min_requirements(sc)))
 		return(ft_err_print(-20));
 	mlx_get_screen_size(sc->mlx_win, &sc->scr_w, &sc->scr_h);
 	if (sc->res_w > sc->scr_w)

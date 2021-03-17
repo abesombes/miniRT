@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/16 15:45:40 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:44:41 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ t_olst *ft_olst_return_next_obj_from_group(t_olst **olst, int min_i, char *otype
 	t_olst *tmp;
 	
 	tmp = *olst;
-	while (tmp && (tmp->id <= min_i || ft_is_char_within_str(tmp->obj_type, otype))
+	while (tmp && (tmp->id <= min_i || !ft_is_char_within_str(otype, tmp->obj_type)))
 		tmp = tmp->next;
-	if (tmp && tmp->obj_type > min_i && ft_is_char_within_str(tmp->obj_type, otype))
+	if (tmp && tmp->obj_type > min_i && ft_is_char_within_str(otype, tmp->obj_type))
 		return (tmp);
 	return (NULL);
 }

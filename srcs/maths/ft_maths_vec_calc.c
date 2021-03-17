@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:43:47 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/16 14:35:48 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:39:13 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void ft_vec_s(t_vector *w, t_vector *u, t_vector *v)
 void ft_vec_cross(t_vector *w, t_vector *u, t_vector *v)
 {
 	ft_vec_set(w, u->y * v->z - u->z * v->y, u->z * v->x - u->x * v->z, u->x * v->y - u->y * v->x);
-	return (w);
 }
 
 t_vector *ft_vec_mul_vec(t_vector *u, t_vector *v)
