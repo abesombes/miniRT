@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 11:16:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:42:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_parse_open_rt_file(char *av, t_scene *sc)
 	if (sc->res_h > sc->scr_h)
 		sc->res_h = sc->scr_h;
 	sc->cur_cam = ft_olst_return_first_obj_id_by_type(&sc->olst, 'm');
-	sc->count_obj = ft_olst_count_obj_by_obj_group_type(&sc->olst, "st");
+	sc->count_obj = ft_olst_count_obj_by_obj_group_type(&sc->olst, "spyqt");
 	if (close(fd) == -1)
 		return(ft_err_print(-19));
 	return (1);

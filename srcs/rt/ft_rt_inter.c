@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 11:53:43 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:33:38 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,19 @@ int		ft_rt_inter_ray_tr(t_ray *r, t_triangle *tr, t_inter *inter)
 	return (1);
 }
 
+int		ft_rt_inter_ray_pl(t_ray *r, t_plane *pl, t_inter *inter)
+{
+	inter->denom = ft_vec_mul(&r->dir, &pl->v);
+	if (inter->denom > 1E-6)
+	{
+		ft_vec_s(&inter->polo, &pl->u, &r->orig);
+		inter->t = ft_vec_mul(&inter->polo, &pl->v) / inter->denom;
+		return (inter->t >= 0);
+	}
+	return (0);
+}
+
+
 int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 {	
 	sc->k = 0;
@@ -83,7 +96,7 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 	inter->cur_obj_id = 0;
 	while (sc->k < sc->count_obj)
 	{
-		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "st")))
+		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "pst")))
 			break ;
 		inter->cur_obj_id = inter->cur_obj->id;
 		if (inter->cur_obj->obj_type == 's')
@@ -108,6 +121,18 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);
 			}
 		}
+		if (inter->cur_obj->obj_type == 'p')
+		{
+			inter->cur_p = inter->cur_obj->plane;
+			inter->cur_p_id = inter->cur_obj->id;
+			ft_init_inter(inter);
+			if ((inter->has_junc = ft_rt_inter_ray_pl(ray, &inter->cur_p, inter)))
+			{
+				if (inter->t < inter->min_t)
+					ft_rt_save_min_t_pix_int(sc, inter, opt);
+			}
+		}
+		
 		sc->k++;
 	}
 	if(inter->min_t != 1E10)
