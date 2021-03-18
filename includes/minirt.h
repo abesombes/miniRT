@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/16 15:30:06 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:51:15 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,11 @@ typedef struct	s_inter
 	double		min_t;
 	double		sqd_dlight;
 	int			count_obj;
-	t_olst		*next_obj;
+	t_olst		*cur_obj;
 	int			cur_obj_id;
+	t_cam		cur_c;
+	t_light		cur_l;
+	t_olst		*sp_obj;
 
 	/* ---------SPHERE-------------*/
 	t_vector	p;
@@ -127,11 +130,8 @@ typedef struct	s_inter
 	t_vector	norm_lpp;
 	t_vector	rdt;
 	t_vector	pspo;
-	t_cam		cur_c;
-	t_light		cur_l;
 	t_sphere	cur_s;
 	int			cur_s_id;
-	t_olst		*sp_obj;
 	t_vector	min_p;
 	t_vector	min_n;
 	t_sphere	min_cur_s;
@@ -154,6 +154,8 @@ typedef struct	s_inter
 	double		detg;
 	double		gamma;
 	double		alpha;
+	t_triangle	cur_t;
+	int			cur_t_id;
 }				t_inter;
 
 typedef struct	s_scene
@@ -178,6 +180,7 @@ typedef struct	s_scene
 	t_ray		ray;
 	t_ray		ray_light;
 	t_olst     	*olst;
+	int			count_obj;
 }				t_scene;
 
 /*--------------------------------init/ft_init.c-----------------------------*/

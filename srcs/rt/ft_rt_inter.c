@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/17 23:00:45 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:53:43 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/ft_maths.h"
 #include "../../includes/ft_olst.h"
 
-int		ft_rt_inter(t_ray *r, t_sphere *sp, t_inter *inter)
+int		ft_rt_inter_ray_sp(t_ray *r, t_sphere *sp, t_inter *inter)
 {
 	inter->a = 1;
 	ft_vec_s(&inter->romspo, &r->orig, &sp->orig); 
@@ -76,46 +76,37 @@ int		ft_rt_inter_ray_tr(t_ray *r, t_triangle *tr, t_inter *inter)
 	return (1);
 }
 
-int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter)
-{
-	inter->count_obj = ft_olst_count_obj_by_obj_group_type(&sc->olst, "st");
+int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
+{	
 	sc->k = 0;
 	inter->min_t = 1E10;
 	inter->cur_obj_id = 0;
-	while (sc->k < inter->count_obj)
+	while (sc->k < sc->count_obj)
 	{
-		if (!(inter->next_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "st")))
+		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "st")))
 			break ;
-		inter->cur_s = inter->next_obj->sp;
-		inter->cur_s_id = inter->next_obj->id;
-		ft_init_inter(inter);
-		if ((inter->has_junc = ft_rt_inter(ray, &inter->cur_s, inter)))
+		inter->cur_obj_id = inter->cur_obj->id;
+		if (inter->cur_obj->obj_type == 's')
 		{
+			inter->cur_s = inter->cur_obj->sp;
+			inter->cur_s_id = inter->cur_obj->id;
+			ft_init_inter(inter);
+			if ((inter->has_junc = ft_rt_inter_ray_sp(ray, &inter->cur_s, inter)))
+			{
 				if (inter->t < inter->min_t)
-					ft_rt_save_min_t_pix_int(sc, inter);
+					ft_rt_save_min_t_pix_int(sc, inter, opt);
+			}
 		}
-		sc->k++;
-	}
-	if(inter->min_t != 1E10)
-		return (1);
-	return (0);
-}
-
-int ft_rt_inter_rl_all(t_scene *sc, t_ray *ray, t_inter *inter)
-{
-	inter->count_obj = ft_olst_count_obj_by_obj_type(&sc->olst, 's');
-	sc->k = 0;
-	inter->min_t = 1E10;
-	while (sc->k < inter->count_obj)
-	{
-		if (!(inter->sp_obj = ft_olst_return_next_obj(&sc->olst, \
-			inter->cur_s_id, 's')))
-			break ;
-		ft_rt_select_next_sp(inter);
-		if ((inter->has_junc = ft_rt_inter(ray, &inter->cur_s, inter)))
+		if (inter->cur_obj->obj_type == 't')
 		{
+			inter->cur_t = inter->cur_obj->tr;
+			inter->cur_t_id = inter->cur_obj->id;
+			ft_init_inter(inter);
+			if ((inter->has_junc = ft_rt_inter_ray_tr(ray, &inter->cur_t, inter)))
+			{
 				if (inter->t < inter->min_t)
-					ft_rt_save_min_t(inter);
+					ft_rt_save_min_t_pix_int(sc, inter, opt);
+			}
 		}
 		sc->k++;
 	}
