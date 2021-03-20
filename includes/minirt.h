@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/20 00:28:09 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/20 17:17:04 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,12 @@ typedef struct	s_inter
 	t_vector	min_n;
 	t_sphere	min_cur_s;
 
+	/* ---------SQUARE-------------*/
+
+	t_vector	trd;
+	t_square	cur_q;
+	int			cur_q_id;
+
 	/* ---------PLANE-------------*/
 
 	double		denom;
@@ -183,7 +189,11 @@ typedef struct	s_scene
 	int			scr_w;
 	int 		scr_h;
 	int			cur_cam;
+	int			count_al;
 	t_vector	alight_sum;
+	t_vector	alight_wsum;
+	t_vector	multi_alight_sum;
+	t_vector	alight_sum_on_rgb;
 	t_vector	pix_int;
 	int			pix_color;
 	t_ray		ray;
