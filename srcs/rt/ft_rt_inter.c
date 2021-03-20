@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 14:33:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/19 09:41:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int		ft_rt_inter_ray_pl(t_ray *r, t_plane *pl, t_inter *inter)
 	}
 	return (0);
 }
-
 
 int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 {	

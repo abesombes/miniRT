@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 14:31:20 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/20 00:28:09 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,21 +172,23 @@ typedef struct	s_scene
 	int 		k;
 	void		*mlx;
 	void		*mlx_win;
-	void        *img;
-	char        *addr;
-	int         bits_per_pixel;
-	int         line_length;
-	int         endian;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			pad_size;
 	int			res_w;
 	int 		res_h;
 	int			scr_w;
 	int 		scr_h;
 	int			cur_cam;
+	t_vector	alight_sum;
 	t_vector	pix_int;
 	int			pix_color;
 	t_ray		ray;
 	t_ray		ray_light;
-	t_olst     	*olst;
+	t_olst		*olst;
 	int			count_obj;
 }				t_scene;
 

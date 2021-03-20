@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/17 18:44:41 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:10:26 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int ft_olst_count_obj_by_obj_type(t_olst **olst, char obj_type)
 	tmp = *olst;
 	while (tmp)
 	{
-	//	printf("\nObject Type Detected: [%c]\n", tmp->obj.obj_type);
 		if (tmp->obj_type == obj_type)
 			count++;
 		tmp = tmp->next;

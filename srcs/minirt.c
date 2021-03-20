@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:30:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/17 18:54:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:42:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 {
 	t_scene	sc;
 	t_inter	inter;
-
+	
 	if ((ft_control_args_file(ac, av) == -1))
 		return (-1);
 	sc.mlx = mlx_init();
@@ -29,11 +29,13 @@ int	main(int ac, char **av)
 	sc.mlx_win = mlx_new_window(sc.mlx, sc.res_w, sc.res_h, "miniRT - RayTracer Engine");
 	sc.img = mlx_new_image(sc.mlx, sc.res_w, sc.res_h);
 	sc.addr = mlx_get_data_addr(sc.img, &sc.bits_per_pixel, &sc.line_length, &sc.endian);
+	printf("\nline_length: [%i]", sc.line_length);
 	ft_rt_trace_rays(&sc, &inter);
 	mlx_key_hook(sc.mlx_win, ft_key_hook, sc.addr);
 	mlx_hook(sc.mlx_win, 17, 1, ft_close_win, sc.addr);
 	/*** ATTENTION 33 SOUS LINUX ***/
-	if (ac == 3 && !(ft_strcmp(av[2], "-save")))
-		ft_save_to_bmp("scene_export.bmp", (unsigned char *)sc.addr, sc.res_w, sc.res_h);
+	printf("\nsc->res: [%i, %i]", sc.res_w, sc.res_h);
+	if (ac == 3 && !(ft_strcmp(av[2], "--save")))
+		ft_save_to_bmp("scene_export.bmp", (unsigned char *)sc.addr, &sc);
 	mlx_loop(sc.mlx);
 }

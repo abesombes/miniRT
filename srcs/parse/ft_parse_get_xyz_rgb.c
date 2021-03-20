@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:16:29 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/13 22:11:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/20 10:58:39 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,4 @@ void ft_get_xyz(char **line, t_vector *vec, double *bounds, int *err_code)
 	if (!nb_digits)
 		*err_code = -6;
 	ft_vec_set(vec, xyz[0], xyz[1], xyz[2]);;
-}
-
-void ft_get_xyza(char **line, t_vector *vec, double *bounds, int *err_code)
-{
-	double xyz[3] = {-1, -1, -1};
-	int nb_digits;
-
-	*err_code = 0;
-	nb_digits = 0;
-	ft_move_to_next_data(line);
-	xyz[0] = ft_atoif(line, &nb_digits);
-	if (!nb_digits)
-		*err_code = -6;
-	if (**line == ',')
-		(*line)++;
-	xyz[1] = ft_atoif(line, &nb_digits);
-	if (!nb_digits)
-		*err_code = -6;
-	if (**line == ',')
-		(*line)++;
-	xyz[2] = ft_atoif(line, &nb_digits);
-	if (bounds && !ft_maths_arr_val_in_range(xyz, bounds[0], bounds[1]))
-		*err_code = -6;
-	if (!nb_digits)
-		*err_code = -6;
-//	printf("\nxyz: [%f, %f, %f]\n", xyz[0], xyz[1], xyz[2]);
-	ft_vec_set(vec, xyz[0], xyz[1], xyz[2]);
 }

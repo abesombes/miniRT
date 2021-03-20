@@ -6,13 +6,14 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:23:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/11 15:30:12 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/20 00:25:17 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ERR_PRINT_H
 # define FT_ERR_PRINT_H
 
+# define err_msg_failed_bmp_export "Error\nFailed BMP export.\n"
 # define err_msg_missing_requirements "Error\nMissing minimum required objects in your scene file: you need a minimum of 1 Res, 1 Cam and 1 Light or Alight.\n"
 # define err_msg_failed_file_closure "Error\nFile closure failed: cannot close the opened file.\n"
 # define err_msg_failed_malloc "Error\nMalloc failed: cannot allocate memory.\n"
