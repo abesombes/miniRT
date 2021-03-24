@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 14:31:20 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:51:15 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,6 @@ typedef struct	s_inter
 	t_vector	min_p;
 	t_vector	min_n;
 	t_sphere	min_cur_s;
-
-	/* ---------PLANE-------------*/
-
-	double		denom;
-	t_vector	polo;
-	t_plane		cur_p;
-	int			cur_p_id;
 
 	/* ---------TRIANGLE-------------*/
 	t_vector	u;

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:26:43 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 14:34:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:44:08 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 int		ft_rt_inter_ray_sp(t_ray *r, t_sphere *sp, t_inter *inter);
 int		ft_rt_inter_ray_tr(t_ray *r, t_triangle *tr, t_inter *inter);
 int		ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt);
-int		ft_rt_inter_ray_pl(t_ray *r, t_plane *pl, t_inter *inter);
 
 /*--------------------------------ft_rt_set_ray.c-----------------------------*/
 void	ft_ray_set(t_ray *r, t_vector *origin, t_vector *direction);
