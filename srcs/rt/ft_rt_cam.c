@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:26:13 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/24 21:09:46 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 23:51:45 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void ft_rt_cam_compute(t_scene *sc, t_cam *cam, t_ray *new_ray)
 
     ft_vec_set(&v_axis, 0, 1, 0);
     a = ft_vec_mul(&cam->orient, &v_axis);
-    printf("\nnorm(cam->orient): [%f]", sqrt(ft_vec_sqnorm(&cam->orient)));
+  //printf("\nnorm(cam->orient): [%f]", sqrt(ft_vec_sqnorm(&cam->orient)));
     if (a == 1 || a == -1)
         ft_vec_set(&dy, 0, -1, 0);
     ft_vec_cross(&dy, &cam->orient, &v_axis);

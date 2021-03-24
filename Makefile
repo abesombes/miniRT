@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/24 23:15:12 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/24 23:45:49 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,8 @@ DIR_SRCS =		./srcs/
 
 DIR_OBJS =		./
 
-MLX =			minilibx_linux
-
-LIBMLX = 		libmlx.a
-
-LMLX = 			-lXext -lX11 -lm -lbsd
+LIBMLX =		libmlx.dylib \
+				libmlx.a
 
 SAVE =			-fsanitize=address
 
@@ -73,9 +70,11 @@ NAME =			miniRT
 all:			$(NAME)
 
 $(NAME) :		$(OBJS)
-				@make -C ./minilibx_linux
-				@cp ./minilibx_linux/libmlx.a libmlx.a
-				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(OBJS) $(LIBMLX) $(LMLX) -o $(NAME)
+				@make -C ./minilibx_mms
+				@make -C ./minilibx_opengl
+				@cp ./minilibx_mms/libmlx.dylib libmlx.dylib
+				@cp ./minilibx_opengl/libmlx.a libmlx.a
+				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS) -o $(NAME)
 
 %.o: %.c
 				@$(CC) $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
@@ -89,7 +88,9 @@ clean:
 				$(RM) $(OBJS)
 
 fclean:			clean
-				@make clean -C ./minilibx_linux
+				@make clean -C ./minilibx_mms
+				@make clean -C ./minilibx_opengl
+				$(RM) libmlx.dylib
 				$(RM) libmlx.a
 				$(RM) $(NAME)
 
