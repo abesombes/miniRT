@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/24 22:59:58 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/24 23:15:12 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX =			minilibx_linux
 
 LIBMLX = 		libmlx.a
 
-LMLX = 			-L./lib/$(MLX) -lXext -lX11 -lm -lbsd
+LMLX = 			-lXext -lX11 -lm -lbsd
 
 SAVE =			-fsanitize=address
 
@@ -75,7 +75,7 @@ all:			$(NAME)
 $(NAME) :		$(OBJS)
 				@make -C ./minilibx_linux
 				@cp ./minilibx_linux/libmlx.a libmlx.a
-				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(LMLX) $(OBJS) -o $(NAME)
+				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(OBJS) $(LIBMLX) $(LMLX) -o $(NAME)
 
 %.o: %.c
 				@$(CC) $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
