@@ -6,12 +6,15 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:26:43 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 11:44:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:45:05 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_RT_H
 # define FT_RT_H
+
+/*--------------------------------ft_rt_cam.c-----------------------------*/
+void ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray);
 
 /*--------------------------------ft_rt_inter.c-----------------------------*/
 int		ft_rt_inter_ray_sp(t_ray *r, t_sphere *sp, t_inter *inter);

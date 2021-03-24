@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 11:56:40 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:57:05 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ void ft_rt_select_cur_cam_light(t_scene *sc, t_inter *inter)
 	inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
 }
 
-void ft_rt_init_ray(t_scene *sc, t_inter *inter)
+void ft_rt_init_ray(t_scene *sc, t_inter *inter, int i, int j)
 {
+	int pixel[2] = {i, j};
+	/*
 	ft_vec_set(&sc->ray.dir, sc->i - sc->res_w / 2, sc->j - sc->res_h / 2, \
 			-sc->res_w / (2 * tan(inter->cur_c.fov / 200)));
 	ft_vec_norm(&sc->ray.dir);
-	ft_vec_cpy(&sc->ray.orig, &inter->cur_c.pos);
+	ft_vec_cpy(&sc->ray.orig, &inter->cur_c.pos);*/
+	ft_rt_cam_compute(sc, cam, pixel, &sc->ray);
 	ft_ray_set(&sc->ray, &sc->ray.orig, &sc->ray.dir);
 }
 
@@ -88,7 +91,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 		while (++sc->i < sc->res_w)
 		{
 			//inter->cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id - 1;
-			ft_rt_init_ray(sc, inter);
+			ft_rt_init_ray(sc, inter, i, j);
 			ft_vec_nul(&sc->pix_int);
 			inter->has_junc = ft_rt_inter_all(sc, &sc->ray, inter, 1);
 			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.00001);

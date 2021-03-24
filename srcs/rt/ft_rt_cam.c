@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:26:13 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/24 16:40:29 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:48:49 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/ft_maths.h"
 #include "../../includes/ft_olst.h"
 
-ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray)
+void ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray)
 {
     t_vector dx;
     t_vector dy;
@@ -37,7 +37,7 @@ ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray)
         ft_vec_set(&dy, 0, -1, 0);
     ft_vec_cross(&dy, &cam->orient, &v_axis);
     ft_vec_cross(&dx, &cam->orient, &dy);
-    a = 2.0 * tan(cam->fov / 2.0);
+    a = 2.0 * tan(cam->fov / 200.0);
     ft_vec_ms(&dx, &dx, a);
     a = a * sc->res_h / sc->res_w;
     ft_vec_ms(&dy, &dy, a);
