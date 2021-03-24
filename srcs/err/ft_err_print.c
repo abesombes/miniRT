@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:17:44 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/20 00:24:25 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/11 10:37:57 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int ft_err_print_2(int error_num)
 
 int	ft_err_print(int error_num)
 {
-	if (error_num == -21)
-		printf(err_msg_failed_bmp_export);
 	if (error_num == -20)
 		printf(err_msg_missing_requirements);
 	if (error_num == -19)

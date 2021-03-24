@@ -6,7 +6,6 @@
 		"ft_parse_get_next_line.h": "c",
 		"ft_parse.h": "c",
 		"ft_olst.h": "c",
-		"ft_rt.h": "c",
-		"ft_export.h": "c"
+		"ft_rt.h": "c"
 	}
 }

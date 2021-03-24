@@ -6,18 +6,16 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 00:53:23 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/20 00:52:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:46:56 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
-#include "../../includes/ft_maths.h"
 
 int ft_init_sc(t_scene *sc)
 {
 	sc->res_w = 0;
 	sc->res_h = 0;
-	ft_vec_nul(&sc->alight_sum);
 	return (1);
 }
 
