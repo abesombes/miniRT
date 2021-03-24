@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile_linux                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/24 16:42:46 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/24 22:29:29 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ DIR_SRCS =		./srcs/
 DIR_OBJS =		./
 
 MLX =			minilibx-linux
-LMLX = 			-L./lib/$(MLX) -lmlx -lXext -lX11 -lm -lbsd 
+LIBMLX = 		libmlx.a
+LMLX = 			-L./lib/$(MLX) -lXext -lX11 -lm -lbsd 
 
 SAVE =			-fsanitize=address
 

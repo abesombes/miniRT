@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/24 22:11:03 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/24 22:59:58 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,11 @@ DIR_SRCS =		./srcs/
 
 DIR_OBJS =		./
 
-MLX =			minilibx-linux
-LMLX = 			-L./lib/$(MLX) -lmlx -lXext -lX11 -lm -lbsd 
+MLX =			minilibx_linux
+
+LIBMLX = 		libmlx.a
+
+LMLX = 			-L./lib/$(MLX) -lXext -lX11 -lm -lbsd
 
 SAVE =			-fsanitize=address
 
@@ -61,7 +64,7 @@ SRC =			minirt.c \
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
-COMPIL =			$(FLAGS) $(SAVE)
+COMPIL =		$(FLAGS) $(SAVE)
 
 OBJS =			$(SRCS:.c=.o)
 
@@ -71,7 +74,8 @@ all:			$(NAME)
 
 $(NAME) :		$(OBJS)
 				@make -C ./minilibx_linux
-				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LMLX) $(OBJS) -o $(NAME)
+				@cp ./minilibx_linux/libmlx.a libmlx.a
+				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(LMLX) $(OBJS) -o $(NAME)
 
 %.o: %.c
 				@$(CC) $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
@@ -86,6 +90,7 @@ clean:
 
 fclean:			clean
 				@make clean -C ./minilibx_linux
+				$(RM) libmlx.a
 				$(RM) $(NAME)
 
 re:				fclean all

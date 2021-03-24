@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/24 16:54:39 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 22:35:32 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "../minilibx_mms/mlx.h"
+# include "../minilibx_linux/mlx.h"
 # define _USE_MATH_DEFINES
 # include <math.h>
 # include <stdio.h>
