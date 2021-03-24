@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/18 11:53:43 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:07:59 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,17 @@ int		ft_rt_inter_ray_sp(t_ray *r, t_sphere *sp, t_inter *inter)
 
 int		ft_rt_inter_ray_tr(t_ray *r, t_triangle *tr, t_inter *inter)
 {
-	t_vector cro;
-	t_vector trd;
-	
+	t_vector	cro;
+	t_vector	trd;
+	double		ps;
+
 	ft_vec_s(&inter->u, &tr->b, &tr->a);
 	ft_vec_s(&inter->v, &tr->c, &tr->a);
 	ft_vec_cross(&inter->uxv, &inter->u, &inter->v);
 	ft_vec_nv(&inter->n, &inter->uxv);
-	
+	ps = ft_vec_mul(&inter->n, &r->dir);
+	if (ps > 0)
+		ft_vec_ms(&inter->n, &inter->n, -1);
 	ft_vec_s(&cro, &tr->c, &r->orig);
 	inter->t = ft_vec_mul(&cro, &inter->n)/ft_vec_mul(&r->dir, &inter->n);
 	if (inter->t < 0)
