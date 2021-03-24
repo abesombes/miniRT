@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/20 17:42:06 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/16 14:30:56 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ t_vector	*ft_vec_sub(t_vector *u, t_vector *v);
 void        ft_vec_cross(t_vector *w, t_vector *u, t_vector *v);
 t_vector	*ft_vec_mul_vec(t_vector *u, t_vector *v);
 t_vector	*ft_vec_div(t_vector *u, t_vector *v);
-void		ft_vec_d(t_vector *w, t_vector *u, t_vector *v);
 void		ft_vec_a(t_vector *w, t_vector *u, t_vector *v);
 void		ft_vec_s(t_vector *w, t_vector *u, t_vector *v);
-void		ft_vec_mv(t_vector *w, t_vector *u, t_vector *v);
 
 /*-----------------ft_maths_vec_norm.c------------------------*/
 double		ft_vec_sqnorm(t_vector *v);
@@ -36,7 +34,6 @@ void		ft_vec_nv(t_vector *w, t_vector *v);
 
 /*-----------------ft_maths_vec_scal_calc.c-------------------*/
 t_vector	*ft_vec_div_scal(t_vector *u, double a);
-void		ft_vec_ds(t_vector *w, t_vector *u, double a);
 t_vector	*ft_vec_mul_scal(t_vector *u, double a);
 double		ft_vec_mul(t_vector *u, t_vector *v);
 void		ft_vec_ms(t_vector *w, t_vector *u, double a);

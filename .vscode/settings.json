@@ -7,8 +7,6 @@
 		"ft_parse.h": "c",
 		"ft_olst.h": "c",
 		"ft_rt.h": "c",
-		"ft_export.h": "c",
-		"cmath": "c",
-		"complex": "c"
+		"ft_export.h": "c"
 	}
 }

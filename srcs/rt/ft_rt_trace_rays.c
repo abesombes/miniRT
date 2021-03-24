@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/20 18:26:46 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/19 11:16:49 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,9 @@ void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter, int opt)
 	if (opt == 1)
 	{
 		ft_vec_ms(&sc->pix_int, &inter->cur_obj->rgb, 20000000 * \
-			inter->cur_l.intst * fabs(ft_vec_mul(ft_vec_normvec(\
+			inter->cur_l.intst * fmax(0, ft_vec_mul(ft_vec_normvec(\
 				ft_vec_sub(&inter->cur_l.pos, &inter->p)), &inter->n) \
 					/ ft_vec_sqnorm(ft_vec_sub(&inter->cur_l.pos, &inter->p))));
-		ft_vec_a(&sc->pix_int, &sc->pix_int, &sc->alight_wsum);
-		ft_vec_ms(&sc->pix_int, &sc->pix_int, 0.5);
 	}
 	ft_vec_cpy(&inter->min_p, &inter->p);
 	ft_vec_cpy(&inter->min_n, &inter->n);
@@ -75,7 +73,7 @@ void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter, int opt)
 void	ft_rt_calc_alight(t_scene *sc)
 {
 	int i;
-	t_olst		cur_al;
+	t_olst	cur_al;
 	double		cur_al_intst;
 	t_vector	cur_al_light;
 	
@@ -88,17 +86,14 @@ void	ft_rt_calc_alight(t_scene *sc)
 		ft_vec_a(&sc->alight_sum, &sc->alight_sum, &cur_al_light);
 		i++;
 	}
-	if (sc->count_al > 0)
-		ft_vec_ds(&sc->alight_wsum, &sc->alight_sum, (double)sc->count_al);
 }
 
 void	ft_rt_calc_pix_color(t_scene *sc)
 {
-//	ft_display_vec(&sc->pix_int);
-		sc->pix_color = ((int)round(fmin(fmax(pow(sc->pix_int.x, 0.4545) + sc->pix_int.x * sc->alight_wsum.x, 0), \
-			255)) + 0) << 16 | ((int)round(fmin(fmax(pow(sc->pix_int.y, 0.4545) + sc->pix_int.y * sc->alight_wsum.y, \
-				0), 255)) + 0) << 8 | ((int)round(fmin(fmax(pow(sc->pix_int.z, \
-					0.4545) + sc->pix_int.z * sc->alight_wsum.z, 0), 255)));
+		sc->pix_color = ((int)round(fmin(fmax(pow(sc->pix_int.x + 5 * sc->alight_sum.x, 0.4545), 0), \
+			255)) + 0) << 16 | ((int)round(fmin(fmax(pow(sc->pix_int.y + 5 * sc->alight_sum.y, 0.4545), \
+				0), 255)) + 0) << 8 | ((int)round(fmin(fmax(pow(sc->pix_int.z + 5 * sc->alight_sum.z, \
+					0.4545), 0), 255)));
 }
 
 void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
@@ -124,6 +119,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
 			ft_init_inter(&inter_l);
 			inter_l.min_t = 1E10;
+			//inter_l.cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id;
 			inter_l.has_junc = ft_rt_inter_all(sc, &sc->ray_light, &inter_l, 0);
 			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
 			if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))
