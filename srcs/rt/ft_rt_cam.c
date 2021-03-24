@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:26:13 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/24 16:48:49 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/24 21:09:46 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/ft_maths.h"
 #include "../../includes/ft_olst.h"
 
-void ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray)
+void ft_rt_cam_compute(t_scene *sc, t_cam *cam, t_ray *new_ray)
 {
     t_vector dx;
     t_vector dy;
@@ -30,9 +30,9 @@ void ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray)
     t_vector tmp;
     double a;
 
-    ft_vec_set(v_axis, 0, 1, 0);
+    ft_vec_set(&v_axis, 0, 1, 0);
     a = ft_vec_mul(&cam->orient, &v_axis);
-    printf("\nnorm(cam->orient): [%f]", sqrt(ft_vec_sqnorm(&cam->orient))
+    printf("\nnorm(cam->orient): [%f]", sqrt(ft_vec_sqnorm(&cam->orient)));
     if (a == 1 || a == -1)
         ft_vec_set(&dy, 0, -1, 0);
     ft_vec_cross(&dy, &cam->orient, &v_axis);
@@ -46,10 +46,9 @@ void ft_rt_cam_compute(t_scene *sc, t_cam *cam, int *pixel, t_ray *new_ray)
     ft_vec_s(&n_hfdy, &cam->orient, &hfdy);
     ft_vec_s(&v0, &n_hfdy, &hfdx);
     ft_vec_norm(&v0);
-    v1 = vo - i/w * dx + j/h * dy;
-    ft_vec_ms(&tmpx, dx, pixel[0] / sc->res_w);
-    ft_vec_ms(&tmpy, dy, pixel[1] / sc->res_h);
-    ft_vec_s(&tmp, &vo, &tmpx);
+    ft_vec_ms(&tmpx, &dx, sc->i / sc->res_w);
+    ft_vec_ms(&tmpy, &dy, sc->j / sc->res_h);
+    ft_vec_s(&tmp, &v0, &tmpx);
     ft_vec_a(&v1, &tmp, &tmpy);
-    ft_ray_set(&new_ray, &cam->pos, &v1);
+    ft_ray_set(new_ray, &cam->pos, &v1);
 }
