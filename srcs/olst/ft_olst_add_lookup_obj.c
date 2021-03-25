@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/17 18:44:41 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:22:58 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,3 +141,32 @@ int ft_olst_return_first_obj_id_by_type(t_olst **olst, char otype)
 		return (tmp->id);
 	return (-1);
 }
+
+int ft_olst_return_next_obj_id_by_type(t_olst **olst, int obj_id, char otype)
+{
+	t_olst	*tmp;
+	int		count;
+	
+	count = ft_olst_count_obj_by_obj_type(olst, otype);
+	if (count == 1)
+		return (obj_id);
+	tmp = *olst;
+	while (tmp && (tmp->obj_type != otype || tmp->id < obj_id))
+		tmp = tmp->next;
+	if (tmp->obj_type == otype && tmp->id > obj_id)
+		return (tmp->id);
+	return (ft_olst_return_first_obj_id_by_type(olst, otype));
+}
+/*
+int ft_olst_return_previous_obj_id_by_type(t_olst **olst, int obj_id, char otype)
+{
+	t_olst *tmp;
+	
+	tmp = *olst;
+	while (tmp && (tmp->obj_type != otype || 
+		tmp = tmp->next;
+	if (tmp->obj_type == otype)
+		return (tmp->id);
+	return (-1);
+}
+*/

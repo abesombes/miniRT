@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 12:01:49 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/25 16:45:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:52:01 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,9 @@ void    ft_write_pixels(int fd, int w, int h, unsigned char *pixels)
     while (i < h)
     {
         write(fd, &bgr_pixels[0] + (w*(h - i - 1) * 3), 3 * w);
-        write(fd, bmp_pad, (4 - (w * 3) % 4) % 4);
+        write(1, bmp_pad, (4 - (w * 3) % 4) % 4);
+//		write(1, "\n", 1);
+//		write(fd, bmp_pad, (4 - (w * 3) % 4) % 4);
         i++;
     }
 }

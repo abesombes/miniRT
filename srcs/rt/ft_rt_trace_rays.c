@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/25 13:59:31 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/25 22:18:25 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void ft_display_inter(t_inter *inter)
 
 void ft_rt_select_cur_cam_light(t_scene *sc, t_inter *inter)
 {
-	inter->cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
+	if (!sc->change_cam)
+		inter->cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
+	else
+		inter->cur_c = ft_olst_return_first_obj_by_type(&sc->olst, 'm')->cam;
 	inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
 }
 
@@ -82,6 +85,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 	
 	sc->j = -1;
 	ft_rt_select_cur_cam_light(sc, inter);
+	printf("\ncur_cam before change in rt_trace_rays: [%i]", sc->cur_cam);
 	while (++sc->j < sc->res_h)
 	{
 		sc->i = -1;

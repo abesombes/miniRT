@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 12:26:13 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/25 14:00:41 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/25 19:20:34 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void ft_rt_cam_compute(t_scene *sc, t_cam *cam, t_ray *new_ray)
     ft_vec_ms(&tmpy, &dy, (float)(sc->j) / (float)(sc->res_h));
     ft_vec_a(&tmp, &v0, &tmpx);
     ft_vec_a(&v1, &tmp, &tmpy);
-     ft_vec_norm(&v1);
+    ft_vec_norm(&v1);
     ft_ray_set(new_ray, &cam->pos, &v1);
 }
