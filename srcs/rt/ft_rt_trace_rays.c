@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/24 21:25:27 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:59:31 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 		sc->i = -1;
 		while (++sc->i < sc->res_w)
 		{
-			//ft_rt_init_ray(sc, inter, i, j);
+			//ft_rt_init_ray(sc, inter);
 			ft_rt_cam_compute(sc, &inter->cur_c, &sc->ray);
 			ft_vec_nul(&sc->pix_int);
 			inter->has_junc = ft_rt_inter_all(sc, &sc->ray, inter, 1);
@@ -104,7 +104,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))
 				ft_vec_nul(&sc->pix_int);
 			ft_rt_calc_pix_color(sc);
-			ft_render_pixel_put(sc, sc->i, sc->res_h - sc->j - 1, sc->pix_color);
+			ft_render_pixel_put(sc, sc->i, sc->j, sc->pix_color);
 		}
 	}
 	mlx_put_image_to_window(sc->mlx, sc->mlx_win, sc->img, 0, 0);
