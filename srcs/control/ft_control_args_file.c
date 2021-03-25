@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 09:43:11 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/14 20:21:30 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:53:23 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_control_rt_file_format(char *str)
 
 int ft_control_args_file(int ac, char **av)
 {
- 	if (ac != 2 && (ft_strcmp(av[2], "-save")))
+ 	if (ac != 2 && (ft_strcmp(av[2], "--save")))
 		return (ft_err_print(-17));
 	if (!ft_control_rt_file_format(av[1]))
 		ft_err_print(-4);
