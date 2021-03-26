@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 14:00:32 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 14:50:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,9 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 			ft_init_inter(inter);
 			if ((inter->has_junc = ft_rt_inter_ray_pl(ray, &inter->cur_p, inter)))
 			{
-				printf("\nJe Viens de Sortir");
-				ft_display_vec(&ray->dir);
-				
 				if (inter->t < inter->min_t)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);
 			}
-			printf("\nSuis Sorti");
-			ft_display_vec(&ray->dir);
 		}
 		sc->k++;
 	}
