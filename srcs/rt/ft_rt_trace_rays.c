@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/25 22:18:25 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 14:03:55 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void ft_display_inter(t_inter *inter)
 
 void ft_rt_select_cur_cam_light(t_scene *sc, t_inter *inter)
 {
-	if (!sc->change_cam)
+	if (sc->change_cam)
 		inter->cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
 	else
 		inter->cur_c = ft_olst_return_first_obj_by_type(&sc->olst, 'm')->cam;
@@ -95,18 +95,26 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_rt_cam_compute(sc, &inter->cur_c, &sc->ray);
 			ft_vec_nul(&sc->pix_int);
 			inter->has_junc = ft_rt_inter_all(sc, &sc->ray, inter, 1);
+			printf("\nBack dans Raytracer");
+			ft_display_vec(&sc->ray.dir);
 			ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.00001);
 			ft_vec_a(&sc->ray_light.orig, &inter->min_p, &inter->alpha_n);
 			ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
 			ft_vec_nv(&inter->norm_lpp, &inter->lpp);
 			ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
+			printf("\nAny change?");
+			ft_display_vec(&sc->ray.dir);
 			ft_init_inter(&inter_l);
 			inter_l.min_t = 1E10;
 			//inter_l.cur_s_id = ft_olst_return_first_obj_by_type(&sc->olst, 's')->id;
 			inter_l.has_junc = ft_rt_inter_all(sc, &sc->ray_light, &inter_l, 0);
 			inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
+			printf("\nAny news?");
+			ft_display_vec(&sc->ray.dir);
 			if ((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight))
 				ft_vec_nul(&sc->pix_int);
+			printf("\nMaybe here before pix_color calc?");
+			ft_display_vec(&sc->ray.dir);
 			ft_rt_calc_pix_color(sc);
 			ft_render_pixel_put(sc, sc->i, sc->j, sc->pix_color);
 		}

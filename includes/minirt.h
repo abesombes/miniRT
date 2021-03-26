@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 00:25:15 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 10:36:29 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ t_vector 	*ft_vec(double x, double y, double z);
 void		ft_display_vec(t_vector *v);
 void		ft_display_ray(t_ray *r);
 int			ft_close_win(char *p);
-int			ft_key_hook(int keycode, void *img, t_scene *sc, t_inter *inter);
+int			ft_key_hook(int keycode, t_scene *sc);
 int			ft_strcmp(const char *s1, const char *s2);
 void		ft_display_sc(t_scene *sc);
 

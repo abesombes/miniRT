@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:30:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/25 23:52:57 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 10:40:40 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 	sc.img = mlx_new_image(sc.mlx, sc.res_w, sc.res_h);
 	sc.addr = mlx_get_data_addr(sc.img, &sc.bits_per_pixel, &sc.line_length, &sc.endian);
 	ft_rt_trace_rays(&sc, &inter);
-	mlx_key_hook(sc.mlx_win, ft_key_hook, sc.addr);
+	mlx_key_hook(sc.mlx_win, ft_key_hook, &sc);
 	mlx_hook(sc.mlx_win, 17, 1, ft_close_win, sc.addr);
 	/*** ATTENTION 33 SOUS LINUX ***/
 	if (ac == 3 && !(ft_strcmp(av[2], "--save")))

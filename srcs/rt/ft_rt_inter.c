@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 00:58:05 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 14:00:32 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,13 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 	sc->k = 0;
 	inter->min_t = 1E10;
 	inter->cur_obj_id = 0;
+	// printf("\nsc->count_obj: [%i]", sc->count_obj);
 	while (sc->k < sc->count_obj)
 	{
-		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "st")))
+		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "spt")))
 			break ;
 		inter->cur_obj_id = inter->cur_obj->id;
-		printf("\nobj:[%c]",inter->cur_obj->obj_type);
+		// printf("\nobj:[%c]",inter->cur_obj->obj_type);
 		if (inter->cur_obj->obj_type == 's')
 		{
 			inter->cur_s = inter->cur_obj->sp;
@@ -114,15 +115,20 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 		}
 		if (inter->cur_obj->obj_type == 'p')
 		{
-			printf("\nhello from l116");
+			// printf("\nhello from l116");
 			inter->cur_p = inter->cur_obj->plane;
 			inter->cur_p_id = inter->cur_obj->id;
 			ft_init_inter(inter);
 			if ((inter->has_junc = ft_rt_inter_ray_pl(ray, &inter->cur_p, inter)))
 			{
+				printf("\nJe Viens de Sortir");
+				ft_display_vec(&ray->dir);
+				
 				if (inter->t < inter->min_t)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);
 			}
+			printf("\nSuis Sorti");
+			ft_display_vec(&ray->dir);
 		}
 		sc->k++;
 	}
