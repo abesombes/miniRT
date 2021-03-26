@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/26 15:50:31 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/26 23:00:40 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC =			minirt.c \
 				control/ft_windows.c \
 				err/ft_err_print.c \
 				export/ft_export_bmp.c \
-				export/ft_export.c \
 				init/ft_init.c \
 				maths/ft_maths_arr_val_in_range.c \
 				maths/ft_maths_sp.c \

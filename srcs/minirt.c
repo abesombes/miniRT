@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:30:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 10:40:40 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 22:09:02 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	main(int ac, char **av)
 	mlx_hook(sc.mlx_win, 17, 1, ft_close_win, sc.addr);
 	/*** ATTENTION 33 SOUS LINUX ***/
 	if (ac == 3 && !(ft_strcmp(av[2], "--save")))
-	save_bmp("scene_export.bmp", (unsigned char *)sc.addr, &sc);
+		ft_export_save_img_bmp(&sc);
+	//save_bmp("scene_export.bmp", (unsigned char *)sc.addr, &sc);
 //		ft_save_to_bmp("scene_export.bmp", (unsigned char *)sc.addr, sc.res_w, sc.res_h);
 	mlx_loop(sc.mlx);
 }
