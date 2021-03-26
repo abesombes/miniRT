@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 00:12:44 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 14:49:20 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 16:15:02 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int		ft_rt_inter_ray_pl(t_ray *r, t_plane *pl, t_inter *inter)
 {
-//	double ps;
 	t_vector trdir;
 	
 	inter->denom = ft_vec_mul(&pl->v, &r->dir);
