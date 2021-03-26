@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/24 12:07:59 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 00:58:05 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "st")))
 			break ;
 		inter->cur_obj_id = inter->cur_obj->id;
+		printf("\nobj:[%c]",inter->cur_obj->obj_type);
 		if (inter->cur_obj->obj_type == 's')
 		{
 			inter->cur_s = inter->cur_obj->sp;
@@ -106,6 +107,18 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 			inter->cur_t_id = inter->cur_obj->id;
 			ft_init_inter(inter);
 			if ((inter->has_junc = ft_rt_inter_ray_tr(ray, &inter->cur_t, inter)))
+			{
+				if (inter->t < inter->min_t)
+					ft_rt_save_min_t_pix_int(sc, inter, opt);
+			}
+		}
+		if (inter->cur_obj->obj_type == 'p')
+		{
+			printf("\nhello from l116");
+			inter->cur_p = inter->cur_obj->plane;
+			inter->cur_p_id = inter->cur_obj->id;
+			ft_init_inter(inter);
+			if ((inter->has_junc = ft_rt_inter_ray_pl(ray, &inter->cur_p, inter)))
 			{
 				if (inter->t < inter->min_t)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);

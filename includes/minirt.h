@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/25 22:09:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/26 00:25:15 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,12 @@ typedef struct	s_inter
 	t_cam		cur_c;
 	t_light		cur_l;
 	t_olst		*sp_obj;
+	
+	/* ---------PLANE-------------*/
+	double		denom;
+	t_vector	polo;
+	t_plane		cur_p;
+	int			cur_p_id;
 
 	/* ---------SPHERE-------------*/
 	t_vector	p;

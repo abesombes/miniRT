@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/25 15:29:04 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/26 00:13:35 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC =			minirt.c \
 				control/ft_windows.c \
 				err/ft_err_print.c \
 				export/ft_export_bmp.c \
+				export/ft_export.c \
 				init/ft_init.c \
 				maths/ft_maths_arr_val_in_range.c \
 				maths/ft_maths_sp.c \
@@ -54,6 +55,7 @@ SRC =			minirt.c \
 				parse/ft_parse_res_cam_alight_light.c \
 				render/ft_render_mlx.c \
 				rt/ft_rt_cam.c \
+				rt/ft_rt_inter_ray_pl.c \
 				rt/ft_rt_inter.c \
 				rt/ft_rt_set_ray.c \
 				rt/ft_rt_trace_rays.c \
