@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 15:51:16 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:18:40 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	ft_parse_open_rt_file(char *av, t_scene *sc)
 	if (fd == -1)
 		return(ft_err_print(-18));
 	ft_init_sc(sc);
-	if (!(ft_parse_fd_line_by_line(fd, sc)))
-		return(ft_err_print(12));
+	if ((ft_parse_fd_line_by_line(fd, sc)) != 1)
+		return(-1);
 	if (!(ft_parse_control_min_requirements(sc)))
 		return(ft_err_print(-20));
 	mlx_get_screen_size(sc->mlx_win, &sc->scr_w, &sc->scr_h);
