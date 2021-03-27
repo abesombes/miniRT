@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 16:13:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:54:08 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 	// printf("\nsc->count_obj: [%i]", sc->count_obj);
 	while (sc->k < sc->count_obj)
 	{
-		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "spqyt")))
+		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "spyqt")))
 			break ;
 		inter->cur_obj_id = inter->cur_obj->id;
 		// printf("\nobj:[%c]",inter->cur_obj->obj_type);
@@ -136,6 +136,21 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);
 			}
 		}
+		if (inter->cur_obj->obj_type == 'y')
+		{
+			//printf("\nhello cylinder");
+			inter->cur_y = inter->cur_obj->cylinder;
+			inter->cur_y_id = inter->cur_obj->id;
+			ft_init_inter(inter);
+			if ((inter->has_junc = ft_rt_inter_ray_cy(ray, &inter->cur_y, inter)))
+			{
+				// printf("\ninter->t avec cylinder: [%f]", inter->t);
+				// ft_display_vec(&inter->p);
+				if (inter->t < inter->min_t)
+					ft_rt_save_min_t_pix_int(sc, inter, opt);
+			}
+		}
+		
 		sc->k++;
 	}
 	if(inter->min_t != 1E10)

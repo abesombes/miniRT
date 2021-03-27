@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 22:29:55 by abesombe          #+#    #+#              #
-#    Updated: 2021/03/26 23:00:40 by abesombe         ###   ########.fr        #
+#    Updated: 2021/03/27 15:49:09 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC =			minirt.c \
 				parse/ft_parse_res_cam_alight_light.c \
 				render/ft_render_mlx.c \
 				rt/ft_rt_cam.c \
+				rt/ft_rt_inter_ray_cy.c \
 				rt/ft_rt_inter_ray_pl.c \
 				rt/ft_rt_inter_ray_sq.c \
 				rt/ft_rt_inter.c \

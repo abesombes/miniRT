@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:43:04 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/27 14:29:34 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:53:29 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,38 @@
 #include "../../includes/ft_maths.h"
 #include "../../includes/ft_olst.h"
 
+
+int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
+{
+	double alpha;
+	double a;
+	double b;
+	double c;
+	t_vector dv;
+	t_vector adp;
+	t_vector q;
+	t_vector trd;
+	
+	ft_vec_ms(&dv, &cy->v, cy->height);
+	a = ft_vec_mul(&r->orig, &dv);
+	b = ft_vec_mul(&r->dir, &dv);
+	c = ft_vec_mul(&cy->u, &dv);
+	alpha = (a + b - c) / ft_vec_mul(&dv, &dv);
+	ft_vec_ms(&adp, &cy->v, alpha);
+	ft_vec_ms(&trd, &r->dir, alpha);
+	ft_vec_a(&q, &r->orig, &trd);
+	ft_vec_s(&q, &q, &cy->u);
+	ft_vec_s(&q, &q, &adp);
+	ft_vec_a(&inter->p, &cy->u, &adp);
+	ft_vec_a(&inter->p, &inter->p, &q);
+	ft_vec_s(&inter->n, &inter->p, &q);
+	inter->t = alpha;
+	if (alpha > 1 || alpha < 0)
+		return (0);
+	return (1);
+}
+
+/*
 int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 {
 
@@ -43,7 +75,7 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 	}
 	return (1);
 }
-/*
+
 void		swap_doubles(double *a, double *b)
 {
 	double buffer;

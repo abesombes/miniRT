@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:26:43 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 15:41:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:32:01 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_rt_trace_rays(t_scene *sc, t_inter *inter);
 void	ft_rt_select_next_sp(t_inter *inter);
 void	ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter, int opt);
 
-
-
+/*--------------------------------ft_rt_inter_ray_cy.c-----------------------------*/
+int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter);
 
 #endif
