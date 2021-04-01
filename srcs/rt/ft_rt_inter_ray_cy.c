@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:43:04 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/29 16:52:15 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/01 22:00:34 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,85 @@
 #include "../../includes/ft_rt.h"
 #include "../../includes/ft_maths.h"
 #include "../../includes/ft_olst.h"
+
+/* FOR ANY CYLINDER ORIENTATION */
+/*
+int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
+{
+	t_vector	rdv, rov;
+	t_vector	rdvr2;
+	double 		a, b, c, v2, d1, d2;
+	
+	ft_vec_cross(&rdv, &r->dir, &cy->v);
+	ft_vec_cross(&rov, &r->orig, &cy->v);
+	a = ft_vec_mul(&rdv, &rov);
+	ft_vec_ms(&rdvr2, &rdv, pow(cy->radius, 2));
+	b = ft_vec_mul(&rdv, &rdvr2);
+	v2 = ft_vec_mul(&cy->v, &cy->v);
+	c = pow(ft_vec_mul(&r->orig, &rdv), 2);
+	c = c * v2;
+	d1 = (a + pow(b - c, 0.5)) / (ft_vec_mul(&rdv, &rdv));
+	d2 = (a - pow(b - c, 0.5)) / (ft_vec_mul(&rdv, &rdv)); 
+	if (d1 < 0)
+		return (0);
+	if (d1 > 0)
+		inter->t = d1;
+	else
+		inter->t = d2;
+	// ft_vec_ms(&inter->rdt, &r->dir, inter->t);
+	// ft_vec_s(&tmp, &inter->rdt, &cy->u);
+	// ft_vec_mv(&inter->p, &r->orig, &inter->rdt);
+	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
+	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
+//	ft_vec_s(&inter->pspo, &inter->p, &cy->u);
+	ft_vec_set(&inter->n, 0, 0, 0.7);
+	return (1);
+}*/
+/*
+int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
+{
+	t_vector	rdv, rov;
+	t_vector	rdvr2;
+	t_vector	bu, tmp, tmp2;
+	t_vector	cyvt;
+	t_vector	drd;
+	double 		a, b, c, v2, d1, d2;
+	
+	ft_vec_s(&bu, &cy->u, &r->orig);
+	ft_vec_mv(&rdv, &r->dir, &cy->v);
+	ft_vec_mv(&rov, &bu, &cy->v);
+	a = ft_vec_mul(&rdv, &rov);
+	ft_vec_ms(&rdvr2, &rdv, pow(cy->radius, 2));
+	b = ft_vec_mul(&rdv, &rdvr2);
+	v2 = ft_vec_mul(&cy->v, &cy->v);
+	c = pow(ft_vec_mul(&bu, &rdv), 2);
+	c = c * v2;
+	d1 = (a + pow(b - c, 0.5)) / (ft_vec_mul(&rdv, &rdv));
+	d2 = (a - pow(b - c, 0.5)) / (ft_vec_mul(&rdv, &rdv)); 
+	if (d1 < 0)
+		return (0);
+	if (d1 > 0)
+	{
+		ft_vec_ms(&drd, &r->dir, d1);
+		ft_vec_s(&tmp2, &drd, &bu);
+		inter->t = ft_vec_mul(&cy->v, &tmp2);
+	}
+	else
+	{
+		ft_vec_ms(&drd, &r->dir, d2);
+		ft_vec_s(&tmp2, &drd, &bu);
+		inter->t = ft_vec_mul(&cy->v, &tmp2);
+	}
+	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
+	ft_vec_s(&tmp, &inter->rdt, &bu);
+	ft_vec_ms(&cyvt, &cy->v, inter->t);
+	ft_vec_s(&inter->n, &tmp, &cyvt);
+	ft_vec_norm(&inter->n);
+	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
+	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
+	return (1);
+}
+*/
 /*
 // CYLINDRE SUR AXE X
 int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
@@ -49,11 +128,13 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 {
 	t_vector 	cross;
 	t_vector	cross2;
+	t_vector	center;
+	t_vector 	tmp;
 	// t_vector	hv;
 	// t_vector	cohv;
 	// t_vector	copo;
 	t_vector	sub;
-	double 		a, b, c, det;
+	double 		a, b, c, det, dist1, dist2;
 	double ps;
 
 	ps = ft_vec_mul(&r->dir, &cy->v);
@@ -85,8 +166,16 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 		inter->t = inter->t2;
 	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
 	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
-	ft_vec_s(&inter->pspo, &inter->p, &cy->u);
-	ft_vec_set(&inter->n, 0, 0, 1);
+//	ft_vec_s(&inter->pspo, &inter->p, &cy->u);
+	dist1 = pow(cy->u.x - inter->p.x, 2) + pow(cy->u.y - inter->p.y, 2) + pow(cy->u.z - inter->p.z, 2);
+	dist2 = pow(pow(cy->radius, 2) - dist1, 0.5);
+	// if (dist2 > cy->height / 2)
+		// return (0);
+	ft_vec_ms(&tmp, &cy->v, dist2);
+	ft_vec_a(&center, &cy->u, &tmp);
+	ft_vec_s(&inter->n, &inter->p, &center);
+	ft_vec_a(&inter->n, &inter->p, &inter->n);
+	//ft_vec_set(&inter->n, 0, 0, 1);
 //	ft_vec_ms(&hv, &cy->v, cy->height/2);
 //	ft_vec_a(&cohv, &cy->u, &hv);
 //	ft_vec_s(&copo, &inter->p, &cohv);

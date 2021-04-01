@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/16 14:30:56 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/03/29 18:55:14 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vector	*ft_vec_mul_vec(t_vector *u, t_vector *v);
 t_vector	*ft_vec_div(t_vector *u, t_vector *v);
 void		ft_vec_a(t_vector *w, t_vector *u, t_vector *v);
 void		ft_vec_s(t_vector *w, t_vector *u, t_vector *v);
+void		ft_vec_mv(t_vector *w, t_vector *u, t_vector *v);
 
 /*-----------------ft_maths_vec_norm.c------------------------*/
 double		ft_vec_sqnorm(t_vector *v);
