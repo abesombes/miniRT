@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/27 14:36:01 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/03 22:26:58 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ typedef struct	s_inter
 
 	t_cylinder	cur_y;
 	int			cur_y_id;
-
+	double		dist1;
+	double		dist2;
 
 	/* ---------SQUARE-------------*/
 
