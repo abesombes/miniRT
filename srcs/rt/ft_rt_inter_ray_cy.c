@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:43:04 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/03 11:48:49 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:10:12 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,55 @@
 #include "../../includes/ft_maths.h"
 #include "../../includes/ft_olst.h"
 
+/*
+int 	ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
+{
+	t_vector    ori_to_cent;
+    t_vector    dir;
+    t_vector    tmp_vec;
+    t_vector    ocdir;
+	t_vector	center, tmp;
+	double 		a, b, c, t0, t1, dist1, dist2, delta;
+
+    ft_vec_s(&ori_to_cent, &r->orig, &cy->u);
+    ft_vec_ms(&tmp_vec, &cy->v, ft_vec_mul(&r->dir, &cy->v));
+    ft_vec_s(&dir, &r->dir, &tmp_vec);
+    ft_vec_ms(&tmp_vec, &cy->v, ft_vec_mul(&ori_to_cent, &cy->v));
+	ft_vec_s(&ocdir, &ori_to_cent, &tmp_vec);
+    a = ft_vec_sqnorm(&dir);
+    b = 2 * ft_vec_mul(&dir, &ocdir);
+  	c = ft_vec_sqnorm(&ocdir) - pow(cy->radius * 2, 2);
+    delta = pow(b, 2) - (4 * a * c);
+	if (delta < 0)
+		return (0);
+	t0 = (-b - pow(delta, 0.5))/ (2.0 * a);
+	t1 = (-b + pow(delta, 0.5))/ (2.0 * a);
+	inter->t = t0;
+	if (t0 <= 0.0001)
+		inter->t = t1;
+	if (t1 <= 0.0001)
+		return (0);
+	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
+	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
+	ft_vec_set(&inter->n, 0.0, 1.0, 0);
+	dist1 = 0.0;
+	dist2 = 0.0;
+	dist1 = pow(cy->u.x - inter->p.x, 2.) + pow(cy->u.y - inter->p.y, 2.) + pow(cy->u.z - inter->p.z, 2.);
+	if (pow(cy->radius, 2.0) >= dist1)
+		dist2 = pow(pow(cy->radius, 2.0) - dist1, 0.5);
+	if (dist2 > cy->height / 2.0)
+		return (0);
+	ft_vec_ms(&tmp, &cy->v, dist2);
+	ft_vec_a(&center, &cy->u, &tmp);
+	ft_vec_s(&inter->n, &inter->p, &center);
+	ft_vec_a(&inter->n, &inter->p, &inter->n);
+	ft_vec_norm(&inter->n);
+	return (1);
+}
+*/
+
 /* FOR ANY CYLINDER ORIENTATION */
+
 int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 {
 	double a, b, c, t0, t1, dist1, dist2, delta;
@@ -25,6 +73,23 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 	(void)dist2;
 	(void)tmp;
 	(void)center;
+
+	t_vector    ori_to_cent;
+    t_vector    dir;
+    t_vector    tmp_vec;
+    t_vector    ocdir;
+	double 		a_bis, b_bis, c_bis, delta_bis;
+
+    ft_vec_s(&ori_to_cent, &r->orig, &cy->u);
+    ft_vec_ms(&tmp_vec, &cy->v, ft_vec_mul(&r->dir, &cy->v));
+    ft_vec_s(&dir, &r->dir, &tmp_vec);
+    ft_vec_ms(&tmp_vec, &cy->v, ft_vec_mul(&ori_to_cent, &cy->v));
+	ft_vec_s(&ocdir, &ori_to_cent, &tmp_vec);
+    a_bis = ft_vec_sqnorm(&dir);
+    b_bis = 2 * ft_vec_mul(&dir, &ocdir);
+  	c_bis = ft_vec_sqnorm(&ocdir) - pow(cy->radius, 2);
+    delta_bis = pow(b_bis, 2) - (4 * a_bis * c_bis);
+	
 	ft_vec_cross(&rdxcd, &r->dir, &cy->v);
 	ft_vec_cross(&roxcd, &r->orig, &cy->v);
 	ft_vec_cross(&coxcd, &cy->u, &cy->v);
@@ -37,43 +102,37 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 	c = ft_vec_mul(&coxcd, &coxcd) + ft_vec_mul(&roxcd, &roxcd) - 2.0 * ft_vec_mul(&roxcd, &coxcd) - pow(cy->radius, 2.);
 //	c = [(Oc x Dc).(Oc x Dc) + (Or x Dc).(Or x Dc) - 2(Or x Dc).(Oc x Dc) - R^2];
 	delta = pow(b, 2.) - 4.0 * a * c;
-//	printf("\ndelta: [%f]", delta);
+	// printf("\na: [%f] - a_bis: [%f]", a, a_bis);
+	// printf("\nb: [%f] - b_bis: [%f]", b, b_bis);
+	// printf("\nc: [%f] - c_bis: [%f]", c, c_bis);
+	// printf("\ndelta: [%f] - delta_bis: [%f]", delta, delta_bis);
+	
+//bon,	printf("\ndelta: [%f]", delta);
 	if (delta < 0)
 		return (0);
 //	printf("\na: [%f], b: [%f], c: [%f], d: [%f]", a, b, c, delta);
 	t0 = (-b - pow(delta, 0.5))/ (2.0 * a);
 	t1 = (-b + pow(delta, 0.5))/ (2.0 * a);
-	//printf("\nt0: [%f] - t1: [%f]", t0, t1);
 	inter->t = t0;
-	if (t0 <= 0.0001)
+	if (t0 < 0.0001)
 		inter->t = t1;
-	if (t1 <= 0.0001)
+	if (t1 < 0.0001)
 		return (0);
-	//printf("\nRAY:");
-	//ft_display_vec(&r->orig);
-	//ft_display_vec(&r->dir);
 	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
-	//printf("\nRDT:");
-	//ft_display_vec(&inter->rdt);
 	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
-	//printf("\nINTER->P:");
-//	ft_display_vec(&inter->p);
-	ft_vec_set(&inter->n, 0.0, 1.0, 0);
-	// dist1 = 0.;
-	// dist2 = 0.;
-	// dist1 = pow(cy->u.x - inter->p.x, 2.) + pow(cy->u.y - inter->p.y, 2.) + pow(cy->u.z - inter->p.z, 2.);
-//	ft_display_vec(&cy->u);
-
-	//printf("\ndist1: [%f]", dist1);
-	// if (pow(cy->radius, 2.0) >= dist1)
-		// dist2 = pow(pow(cy->radius, 2.0) - dist1, 0.5);
-	//if (dist2 > cy->height / 2.0)
-	//	return (0);
-	// ft_vec_ms(&tmp, &cy->v, dist2);
-	// ft_vec_a(&center, &cy->u, &tmp);
-	// ft_vec_s(&inter->n, &inter->p, &center);
-	// ft_vec_a(&inter->n, &inter->p, &inter->n);
-	// ft_vec_norm(&inter->n);
+	dist1 = pow(pow(cy->u.x - inter->p.x, 2.) + pow(cy->u.y - inter->p.y, 2.) + pow(cy->u.z - inter->p.z, 2.), 0.5);
+	dist2 = pow(pow(dist1, 2) - pow(cy->radius, 2.0), 0.5);
+//	printf("\n[%i] - dist1: [%f] - dist2: [%f]", dist1 > dist2, dist1, dist2);
+	if (dist2 > cy->height / 2.0)
+		return (0);
+	ft_vec_ms(&tmp, &cy->v, dist2);
+	ft_vec_a(&center, &cy->u, &tmp);
+	ft_vec_s(&inter->n, &inter->p, &center);
+	ft_vec_norm(&inter->n);
+	//ft_vec_ms(&tmp, &inter->n, 0.000001);
+	//ft_vec_a(&inter->p, &inter->p, &tmp);
+	ft_vec_a(&inter->n, &inter->p, &inter->n);
+	ft_vec_ms(&inter->n, &inter->n, -1.0);
 	// ft_display_vec(&inter->n);
 	return (1);
 }
