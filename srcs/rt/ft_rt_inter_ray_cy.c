@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:43:04 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/03 17:10:12 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:49:08 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,55 +68,24 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 {
 	double a, b, c, t0, t1, dist1, dist2, delta;
 	t_vector rdxcd, roxcd, coxcd, tmp, center;
-
-	(void)dist1;
-	(void)dist2;
-	(void)tmp;
-	(void)center;
-
-	t_vector    ori_to_cent;
-    t_vector    dir;
-    t_vector    tmp_vec;
-    t_vector    ocdir;
-	double 		a_bis, b_bis, c_bis, delta_bis;
-
-    ft_vec_s(&ori_to_cent, &r->orig, &cy->u);
-    ft_vec_ms(&tmp_vec, &cy->v, ft_vec_mul(&r->dir, &cy->v));
-    ft_vec_s(&dir, &r->dir, &tmp_vec);
-    ft_vec_ms(&tmp_vec, &cy->v, ft_vec_mul(&ori_to_cent, &cy->v));
-	ft_vec_s(&ocdir, &ori_to_cent, &tmp_vec);
-    a_bis = ft_vec_sqnorm(&dir);
-    b_bis = 2 * ft_vec_mul(&dir, &ocdir);
-  	c_bis = ft_vec_sqnorm(&ocdir) - pow(cy->radius, 2);
-    delta_bis = pow(b_bis, 2) - (4 * a_bis * c_bis);
-	
+		
 	ft_vec_cross(&rdxcd, &r->dir, &cy->v);
 	ft_vec_cross(&roxcd, &r->orig, &cy->v);
 	ft_vec_cross(&coxcd, &cy->u, &cy->v);
 	ft_vec_set(&inter->p, 0, 0, 0);
 	a = ft_vec_mul(&rdxcd, &rdxcd);
-//	printf("\na: [%f]", a);
-//	a = [(Dr x Dc).(Dr x Dc)];
 	b = 2.0 * ft_vec_mul(&rdxcd, &roxcd) - 2.0 * ft_vec_mul(&rdxcd, &coxcd); 
-//	b = [2(Dr x Dc).(Or x Dc) - 2(Dr x Dc).(Oc x Dc)];
 	c = ft_vec_mul(&coxcd, &coxcd) + ft_vec_mul(&roxcd, &roxcd) - 2.0 * ft_vec_mul(&roxcd, &coxcd) - pow(cy->radius, 2.);
-//	c = [(Oc x Dc).(Oc x Dc) + (Or x Dc).(Or x Dc) - 2(Or x Dc).(Oc x Dc) - R^2];
 	delta = pow(b, 2.) - 4.0 * a * c;
-	// printf("\na: [%f] - a_bis: [%f]", a, a_bis);
-	// printf("\nb: [%f] - b_bis: [%f]", b, b_bis);
-	// printf("\nc: [%f] - c_bis: [%f]", c, c_bis);
-	// printf("\ndelta: [%f] - delta_bis: [%f]", delta, delta_bis);
-	
-//bon,	printf("\ndelta: [%f]", delta);
 	if (delta < 0)
 		return (0);
 //	printf("\na: [%f], b: [%f], c: [%f], d: [%f]", a, b, c, delta);
 	t0 = (-b - pow(delta, 0.5))/ (2.0 * a);
 	t1 = (-b + pow(delta, 0.5))/ (2.0 * a);
 	inter->t = t0;
-	if (t0 < 0.0001)
+	if (t0 < 0.000001)
 		inter->t = t1;
-	if (t1 < 0.0001)
+	if (t1 < 0.000001)
 		return (0);
 	ft_vec_ms(&inter->rdt, &r->dir, inter->t);
 	ft_vec_a(&inter->p, &r->orig, &inter->rdt);
@@ -129,8 +98,8 @@ int		ft_rt_inter_ray_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 	ft_vec_a(&center, &cy->u, &tmp);
 	ft_vec_s(&inter->n, &inter->p, &center);
 	ft_vec_norm(&inter->n);
-	//ft_vec_ms(&tmp, &inter->n, 0.000001);
-	//ft_vec_a(&inter->p, &inter->p, &tmp);
+	ft_vec_ms(&tmp, &inter->n, 0.000001);
+	ft_vec_a(&inter->p, &inter->p, &tmp);
 	ft_vec_a(&inter->n, &inter->p, &inter->n);
 	ft_vec_ms(&inter->n, &inter->n, -1.0);
 	// ft_display_vec(&inter->n);
