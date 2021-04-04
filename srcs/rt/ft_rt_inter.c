@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/29 10:13:27 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/04 20:14:10 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,11 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 		}
 		if (inter->cur_obj->obj_type == 'y')
 		{
-			//printf("\nhello cylinder");
 			inter->cur_y = inter->cur_obj->cylinder;
 			inter->cur_y_id = inter->cur_obj->id;
 			ft_init_inter(inter);
 			if ((inter->has_junc = ft_rt_inter_ray_cy(ray, &inter->cur_y, inter)))
 			{
-				// printf("\ninter->t avec cylinder: [%f]", inter->t);
-				// ft_display_vec(&inter->p);
 				if (inter->t < inter->min_t)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);
 			}

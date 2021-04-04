@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 14:49:51 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/04 20:36:34 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,12 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 	
 	sc->j = -1;
 	ft_rt_select_cur_cam_light(sc, inter);
-	printf("\ncur_cam before change in rt_trace_rays: [%i]", sc->cur_cam);
 	while (++sc->j < sc->res_h)
 	{
 		sc->i = -1;
 		while (++sc->i < sc->res_w)
 		{
-			//ft_rt_init_ray(sc, inter);
+			ft_rt_init_ray(sc, inter);
 			ft_rt_cam_compute(sc, &inter->cur_c, &sc->ray);
 			ft_vec_nul(&sc->pix_int);
 			inter->has_junc = ft_rt_inter_all(sc, &sc->ray, inter, 1);
