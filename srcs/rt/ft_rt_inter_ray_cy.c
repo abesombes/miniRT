@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:43:04 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/05 11:18:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/05 14:05:04 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,22 @@
 static int	ft_rt_calc_cy_normal(t_ray *r, t_cylinder *cy, t_inter *inter)
 {
 	t_vector tmp, center;
+	t_vector op;
 	
 	(void)r;
 	ft_vec_ms(&tmp, &cy->v, inter->dist2);
 	ft_vec_a(&center, &cy->u, &tmp);
 	ft_vec_s(&inter->n, &inter->p, &center);
-	ft_vec_norm(&inter->n);
-	//ft_vec_a(&inter->n, &inter->p, &inter->n);
+	ft_vec_s(&op, &inter->p, &cy->u);
+	if (ft_vec_mul(&op, &tmp) < 0)
+	{
+	 	ft_vec_ms(&tmp, &tmp, -1);
+		ft_vec_a(&center, &cy->u, &tmp);
+		ft_vec_s(&inter->n, &inter->p, &center);
+	}
 	ft_vec_norm(&inter->n);
 	if (ft_vec_mul(&inter->n, &r->dir) > 0)
 		ft_vec_ms(&inter->n, &inter->n, -1.0);
-	// ft_vec_ms(&tmp, &inter->n, 0.000001);
-	// ft_vec_a(&inter->p, &inter->p, &tmp);
 	return (1);
 }
 
