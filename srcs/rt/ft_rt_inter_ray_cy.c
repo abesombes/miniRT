@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:43:04 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/05 15:59:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/06 00:22:37 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	ft_rt_solve_cy(t_ray *r, t_cylinder *cy, t_inter *inter)
 	t_vector rdxcd;
 	t_vector roxcd;
 	t_vector coxcd;
-	
+
+	ft_vec_norm(&cy->v);
+	//printf("\n norme cy->v: [%f]", ft_vec_sqnorm(&cy->v));
 	ft_vec_cross(&rdxcd, &r->dir, &cy->v);
 	ft_vec_cross(&roxcd, &r->orig, &cy->v);
 	ft_vec_cross(&coxcd, &cy->u, &cy->v);
