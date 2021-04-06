@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:39:59 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/27 15:47:53 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:08:02 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int	ft_parse_control_min_requirements(t_scene *sc)
 {
+	sc->count_lights = ft_olst_count_obj_by_obj_type(&sc->olst, 'l');
 	if ((ft_olst_count_obj_by_obj_type(&sc->olst, 'a') > 0 
 		|| ft_olst_count_obj_by_obj_type(&sc->olst, 'l') > 0) && 
 			ft_olst_count_obj_by_obj_type(&sc->olst, 'm') > 0 &&

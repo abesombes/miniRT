@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:23:37 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/26 10:54:01 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/06 18:23:35 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int ft_olst_return_next_obj_id_by_type(t_olst **olst, int obj_id, char otype)
 	tmp = *olst;
 	while (tmp)
 	{
-		printf("\nobj_type: [%c]- obj_id: [%i]", tmp->obj_type, tmp->id);
+//		printf("\nobj_type: [%c]- obj_id: [%i]", tmp->obj_type, tmp->id);
 		if (tmp->obj_type == otype && tmp->id > obj_id)
 			break ;
 		tmp = tmp->next;

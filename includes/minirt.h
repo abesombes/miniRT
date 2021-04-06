@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/05 12:13:27 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:36:33 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,11 @@ typedef struct	s_inter
 	double		t2;
 	double		min_t;
 	double		sqd_dlight;
-	int			count_obj;
 	t_olst		*cur_obj;
 	int			cur_obj_id;
 	t_cam		cur_c;
 	t_light		cur_l;
+	int			cur_l_id;
 	t_olst		*sp_obj;
 	
 	/* ---------CYLINDER-------------*/
@@ -202,6 +202,7 @@ typedef struct	s_scene
 	t_ray		ray_light;
 	t_olst     	*olst;
 	int			count_obj;
+	int			count_lights;
 	int			change_cam;
 }				t_scene;
 

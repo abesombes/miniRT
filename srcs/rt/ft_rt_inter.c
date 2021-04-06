@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/04 20:14:10 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:01:44 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,11 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 	sc->k = 0;
 	inter->min_t = 1E10;
 	inter->cur_obj_id = 0;
-	// printf("\nsc->count_obj: [%i]", sc->count_obj);
 	while (sc->k < sc->count_obj)
 	{
 		if (!(inter->cur_obj = ft_olst_return_next_obj_from_group(&sc->olst, inter->cur_obj_id, "spyqt")))
 			break ;
 		inter->cur_obj_id = inter->cur_obj->id;
-		// printf("\nobj:[%c]",inter->cur_obj->obj_type);
 		if (inter->cur_obj->obj_type == 's')
 		{
 			inter->cur_s = inter->cur_obj->sp;
