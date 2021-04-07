@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:37:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/03/29 18:55:14 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:54:41 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void        ft_vec_cross(t_vector *w, t_vector *u, t_vector *v);
 t_vector	*ft_vec_mul_vec(t_vector *u, t_vector *v);
 t_vector	*ft_vec_div(t_vector *u, t_vector *v);
 void		ft_vec_a(t_vector *w, t_vector *u, t_vector *v);
+void        ft_vec_ac(t_vector *w, t_vector *u, t_vector *v);
 void		ft_vec_s(t_vector *w, t_vector *u, t_vector *v);
 void		ft_vec_mv(t_vector *w, t_vector *u, t_vector *v);
 

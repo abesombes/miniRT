@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 14:43:47 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/01 18:38:37 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:46:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ void ft_vec_a(t_vector *w, t_vector *u, t_vector *v)
     w->x = u->x + v->x;
     w->y = u->y + v->y;
     w->z = u->z + v->z;
+}
+
+void ft_vec_ac(t_vector *w, t_vector *u, t_vector *v)
+{
+    w->x = pow(pow(u->x, 2) + pow(v->x, 2), 0.5);
+    w->y = pow(pow(u->y, 2) + pow(v->y, 2), 0.5);
+    w->z = pow(pow(u->z, 2) + pow(v->z, 2), 0.5);
 }
 
 t_vector *ft_vec_sub(t_vector *u, t_vector *v)
