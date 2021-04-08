@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/07 15:46:07 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/07 23:59:57 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,22 @@ void ft_rt_select_next_sp(t_inter *inter)
 	ft_init_inter(inter);
 }
 
+void	ft_rt_switch_to_next_light(int k, t_inter *inter, t_scene *sc)
+{
+		if (k == 0)
+		{
+			inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
+			inter->cur_l_id = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->id;
+			inter->cur_l_rgb = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->rgb;
+		}
+		else if (k > 0)
+		{
+		inter->cur_l_id = ft_olst_return_next_obj_id_by_type(&sc->olst, inter->cur_l_id, 'l');
+		inter->cur_l_rgb = (ft_olst_return_obj_by_id(&sc->olst, inter->cur_l_id))->rgb;
+		inter->cur_l = (ft_olst_return_obj_by_id(&sc->olst, inter->cur_l_id))->light;
+		}
+}
+
 void 	ft_rt_get_light_color_sum(t_scene *sc, t_inter *inter)
 {
 	t_inter inter_l;
@@ -74,18 +90,7 @@ void 	ft_rt_get_light_color_sum(t_scene *sc, t_inter *inter)
 //					/ ft_vec_sqnorm(ft_vec_sub(&inter->cur_l.pos, &inter->p))));
 	while (k < sc->count_lights)
 	{
-		if (k == 0)
-		{
-			inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
-			inter->cur_l_id = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->id;
-			inter->cur_l_rgb = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->rgb;
-		}
-		else if (k > 0)
-		{
-		inter->cur_l_id = ft_olst_return_next_obj_id_by_type(&sc->olst, inter->cur_l_id, 'l');
-		inter->cur_l_rgb = (ft_olst_return_obj_by_id(&sc->olst, inter->cur_l_id))->rgb;
-		inter->cur_l = (ft_olst_return_obj_by_id(&sc->olst, inter->cur_l_id))->light;
-		}
+		ft_rt_switch_to_next_light(k, inter, sc);
 	//	printf("\ncur_light: [%i]", inter->cur_l_id);
 		ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
 		ft_vec_nv(&inter->norm_lpp, &inter->lpp);
@@ -96,17 +101,21 @@ void 	ft_rt_get_light_color_sum(t_scene *sc, t_inter *inter)
 		inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
 		if (!(inter_l.has_junc) || pow(inter_l.min_t, 2) >= inter_l.sqd_dlight)
 		{
-			alpha = 20000000 * inter->cur_l.intst * fmax(0, ft_vec_mul(&sc->ray_light.dir, &inter_l.min_n) / inter_l.sqd_dlight);
+			alpha = 200000000 * inter->cur_l.intst * fmax(0, ft_vec_mul(&sc->ray_light.dir, &inter_l.min_n) / inter_l.sqd_dlight);
 			// printf("\ninter_l.min_t: [%f]", inter_l.min_t);
 			// ft_display_vec(&sc->ray_light.dir);
 			// ft_display_vec(&inter_l.min_n);
-			// printf("PS rldir et inter_l.min_n: [%f]", ft_vec_mul(&sc->ray_light.dir, &inter_l.min_n));
-			// printf("\nalpha: [%f]", alpha);
+			printf("\nINTER->NORM_LPP: [%f, %f, %f]", inter->norm_lpp.x, inter->norm_lpp.y, inter->norm_lpp.z);
+			printf("\nRAYLIGHT_DIR: [%f, %f, %f]", sc->ray_light.dir.x, sc->ray_light.dir.y, sc->ray_light.dir.z);
+			printf("\nP_SCAL: [%f]", ft_vec_mul(&sc->ray_light.dir, &inter_l.min_n));
+		//	printf("\ncur_l.intst: [%f]", inter->cur_l.intst);
+			printf("\nalpha: [%f]", alpha);
 			// printf("\ncurrent light rgb: ");
 			// ft_display_vec(&inter->cur_l_rgb);
 			ft_vec_ms(&tmp, &inter->cur_l_rgb, alpha);
-			
+			printf("\nTMP: [%f, %f, %f]", tmp.x, tmp.y, tmp.z);	
 			ft_vec_ac(&sc->light_color, &sc->light_color, &tmp); 
+			//printf("\nL_COL in GET_COLOR_SUM: [%f, %f, %f]", sc->light_color.x, sc->light_color.y, sc->light_color.z);
 	//		if (sc->light_color.x > 0 || sc->light_color.y > 0 || sc->light_color.z > 0)
 	// 		{
 	// 		printf("\n----------------------------------------------");	
@@ -127,16 +136,23 @@ void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter, int opt)
 	if (opt == 1)
 	{
 		ft_rt_get_light_color_sum(sc, inter);
-		if (sc->light_color.x > 0 || sc->light_color.y > 0 || sc->light_color.z > 0)
-		{
-		printf("\nobj->rgb:");
-		ft_display_vec(&inter->cur_obj->rgb);
-		printf("\nsc->light_color:");
-		ft_display_vec(&sc->light_color);
-		}
+	//	if ((sc->light_color.x > 0 || sc->light_color.y > 0 || sc->light_color.z > 0) && (inter->min_t < 1E10))
+	//	{
+		// printf("\nobj->rgb:");
+		// ft_display_vec(&inter->cur_obj->rgb);
+		printf("\nRGB: [%f, %f, %f]", inter->cur_obj->rgb.x, inter->cur_obj->rgb.y, inter->cur_obj->rgb.z);
+		printf("\nL_COL: [%f, %f, %f]", sc->light_color.x, sc->light_color.y, sc->light_color.z);
+		// printf("\nsc->light_color:");
+		// ft_display_vec(&sc->light_color);
+		//}
 		ft_vec_ac(&sc->pix_int, &inter->cur_obj->rgb, &sc->light_color);
-		// printf("\nsc->pix_int:");
-		// ft_display_vec(&sc->pix_int);
+		printf("\nPIX_INT: [%f, %f, %f]", sc->pix_int.x, sc->pix_int.y, sc->pix_int.z);
+		// if ((sc->light_color.x > 0 || sc->light_color.y > 0 || sc->light_color.z > 0) && (inter->min_t < 1E10))
+		// // {
+		// 	printf("\nsc->pix_int:");
+		// 	ft_display_vec(&sc->pix_int);
+		// }
+
 	}
 	ft_vec_cpy(&inter->min_p, &inter->p);
 	ft_vec_cpy(&inter->min_n, &inter->n);
