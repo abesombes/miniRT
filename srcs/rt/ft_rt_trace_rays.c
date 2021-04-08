@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/08 22:55:11 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/09 00:14:00 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,33 +98,9 @@ void 	ft_rt_get_light_color_sum(t_scene *sc, t_inter *inter)
 		inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
 		if (!(inter_l.has_junc) || (inter_l.has_junc && pow(inter_l.min_t, 2) >= inter_l.sqd_dlight))
 		{
-			alpha = 150000 * inter->cur_l.intst * fmax(0, ft_vec_mul(&sc->ray_light.dir, &inter->min_n) / inter_l.sqd_dlight);
-		//	if (alpha <= 0.01)
-		//	printf("\n[%i, %i]", sc->i, sc->j);
-			// printf("\ninter_l.min_t: [%f]", inter_l.min_t);
-			// ft_display_vec(&sc->ray_light.dir);
-			// ft_display_vec(&inter_l.min_n);
-			// printf("\nINTER->MIN_N: [%f, %f, %f]", inter.min_n.x, inter->min_n.y, inter->min_n.z);
-			// printf("\nRAYLIGHT_DIR: [%f, %f, %f]", sc->ray_light.dir.x, sc->ray_light.dir.y, sc->ray_light.dir.z);
-			// printf("\nP_SCAL: [%f]", ft_vec_mul(&sc->ray_light.dir, &inter->min_n) / inter_l.sqd_dlight);
-			// printf("\ncur_l.intst: [%f]", inter->cur_l.intst);
-			//  printf("\nalpha: [%f]", alpha);
-			// printf("\ncurrent light rgb: ");
-			// ft_display_vec(&inter->cur_l_rgb);
-			ft_vec_ms_clamp(&tmp, &inter->cur_l_rgb, alpha, 255 * inter->cur_l.intst);
-			// printf("\nTMP: [%f, %f, %f]", tmp.x, tmp.y, tmp.z);	
-			ft_vec_ac(&sc->light_color, &sc->light_color, &tmp); 
-			// printf("\nL_COL: [%f, %f, %f]", sc->light_color.x, sc->light_color.y, sc->light_color.z);
-	//		if (sc->light_color.x > 0 || sc->light_color.y > 0 || sc->light_color.z > 0)
-	// 		{
-	// 		printf("\n----------------------------------------------");	
-	// 		printf("\n----------------------------------------------");				
-	// 		printf("\nsc->light_color:");
-	// 		ft_display_vec(&sc->light_color);
-	// 		printf("\n----------------------------------------------");	
-	// 		printf("\n----------------------------------------------");	
-	// 		}
-
+			alpha = 1500000000 * sqrt(inter->cur_l.intst) * fmax(0, ft_vec_mul(&sc->ray_light.dir, &inter->min_n) / inter_l.sqd_dlight);
+			ft_vec_ms_clamp(&tmp, &inter->cur_l_rgb, alpha, 255);
+			ft_vec_ac(&sc->light_color, &sc->light_color, &tmp);
 		}
 		k++;
 	}
@@ -162,9 +138,9 @@ void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter, int opt)
 
 void ft_rt_calc_pix_color(t_scene *sc)
 {
-		sc->pix_color = ((int)round(fmin(fmax(pow(1000 * sc->pix_int.x, 0.4545), 0), \
-			255)) + 0) << 16 | ((int)round(fmin(fmax(pow(1000 * sc->pix_int.y, 0.4545), \
-				0), 255)) + 0) << 8 | ((int)round(fmin(fmax(pow(1000 * sc->pix_int.z, \
+		sc->pix_color = ((int)round(fmin(fmax(pow(sc->pix_int.x, 0.4545), 0), \
+			255)) + 0) << 16 | ((int)round(fmin(fmax(pow(sc->pix_int.y, 0.4545), \
+				0), 255)) + 0) << 8 | ((int)round(fmin(fmax(pow(sc->pix_int.z, \
 					0.4545), 0), 255)));
 		// printf("\nsc->pix_color = [%i]", sc->pix_color);
 }
