@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:21:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/09 11:52:14 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:33:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void ft_rt_select_cur_cam_light(t_scene *sc, t_inter *inter)
 		inter->cur_c = (ft_olst_return_obj_by_id(&sc->olst, sc->cur_cam))->cam;
 	else
 		inter->cur_c = ft_olst_return_first_obj_by_type(&sc->olst, 'm')->cam;
-//	inter->cur_l = ft_olst_return_first_obj_by_type(&sc->olst, 'l')->light;
 }
 
 void ft_rt_init_ray(t_scene *sc, t_inter *inter)
@@ -84,36 +83,43 @@ void 	ft_rt_get_light_color_sum(t_scene *sc, t_inter *inter)
 	ft_vec_nul(&sc->light_color);
 	ft_vec_ms(&inter->alpha_n, &inter->min_n, 0.00001);
 	ft_vec_a(&sc->ray_light.orig, &inter->min_p, &inter->alpha_n);
+//	ft_vec_norm(&sc->ray_light.orig);
 	while (k < sc->count_lights)
 	{
 		ft_rt_switch_to_next_light(k, inter, sc);
 		ft_vec_s(&inter->lpp, &inter->cur_l.pos, &inter->min_p);
 		ft_vec_nv(&inter->norm_lpp, &inter->lpp);
 		ft_vec_cpy(&sc->ray_light.dir, &inter->norm_lpp);
+		ft_display_vec(&sc->ray_light.orig);
+		ft_display_vec(&sc->ray_light.dir);
 		ft_init_inter(&inter_l);
 		inter_l.min_t = 1E10;
+		printf("\nINTERSECTION RAYON LIGHT AVEC OBJETS DE LA SCENE?");
 		inter_l.has_junc = ft_rt_inter_all(sc, &sc->ray_light, &inter_l, 0);
 		inter_l.sqd_dlight = ft_vec_sqnorm(&inter->lpp);
-		if (!(inter_l.has_junc) || (inter_l.has_junc && pow(inter_l.min_t, 2) >= inter_l.sqd_dlight))
+		if (!((inter_l.has_junc && pow(inter_l.min_t, 2) < inter_l.sqd_dlight)))
 		{
 			alpha = 15000 * sqrt(inter->cur_l.intst) * fmax(0, ft_vec_mul(&sc->ray_light.dir, &inter->min_n) / inter_l.sqd_dlight);
 			ft_vec_ms_clamp(&tmp, &inter->cur_l_rgb, alpha, 255);
 			ft_vec_ac(&sc->light_color, &sc->light_color, &tmp);
 		}
+		else if (inter_l.has_junc)
+			printf("\nINTERSECTION LUMIERE CONFIRMED [%f] [%f]", pow(inter_l.min_t, 2), inter_l.sqd_dlight);
 		k++;
 	}
+	printf("\nLIGHT_COLOR: [%f, %f, %f]", sc->light_color.x, sc->light_color.y, sc->light_color.z);
 }
 
 void ft_rt_save_min_t_pix_int(t_scene *sc, t_inter *inter, int opt)
 {
+	ft_vec_cpy(&inter->min_p, &inter->p);
+	ft_vec_cpy(&inter->min_n, &inter->n);
 	inter->min_t = inter->t;
 	if (opt == 1)
 	{
 		ft_rt_get_light_color_sum(sc, inter);
 		ft_vec_mv(&sc->pix_int, &inter->cur_obj->rgb, &sc->light_color);
 	}
-	ft_vec_cpy(&inter->min_p, &inter->p);
-	ft_vec_cpy(&inter->min_n, &inter->n);
 }
 
 void ft_rt_calc_pix_color(t_scene *sc)
@@ -136,6 +142,7 @@ void ft_rt_trace_rays(t_scene *sc, t_inter *inter)
 			ft_rt_init_ray(sc, inter);
 			ft_rt_cam_compute(sc, &inter->cur_c, &sc->ray);
 			ft_vec_nul(&sc->pix_int);
+			printf("\nINTERSECTION RAYON CAM AVEC OBJETS DE LA SCENE?");
 			inter->has_junc = ft_rt_inter_all(sc, &sc->ray, inter, 1);
 			ft_rt_calc_pix_color(sc);
 			ft_render_pixel_put(sc, sc->i, sc->j, sc->pix_color);

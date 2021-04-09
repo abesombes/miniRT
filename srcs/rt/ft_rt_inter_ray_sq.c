@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 15:15:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/09 11:50:56 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:29:30 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_rt_inter_ray_sq(t_ray *r, t_square *sq, t_inter *inter)
 		ft_vec_a(&inter->p, &r->orig, &inter->trd);
         inter->n = sq->v;
         ps = ft_vec_mul(&r->dir, &inter->n);
-        if (ps == 1)
+        if (fabs(ps) == 1)
             ft_vec_ms(&inter->n, &inter->n, -1.0);
 		if (inter->t >= 0)
 		{ 
