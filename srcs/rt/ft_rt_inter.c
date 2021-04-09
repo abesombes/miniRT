@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:19:31 by abesombe          #+#    #+#             */
-/*   Updated: 2021/04/06 11:01:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/04/09 11:53:54 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ int ft_rt_inter_all(t_scene *sc, t_ray *ray, t_inter *inter, int opt)
 			ft_init_inter(inter);
 			if ((inter->has_junc = ft_rt_inter_ray_sq(ray, &inter->cur_q, inter)))
 			{
-			//	printf("\ninter->t: [%f]", inter->t);
 				if (inter->t < inter->min_t)
 					ft_rt_save_min_t_pix_int(sc, inter, opt);
 			}
